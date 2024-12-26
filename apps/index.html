@@ -7,7 +7,12 @@
   <style>
   img{
   width: 150px;
-  height: 150px;
+  height: 250px;
+  }
+  .thumbnail{
+  
+  height:350px;
+  {
   </style>
 
 
@@ -44,7 +49,7 @@ Choose a stack
     
       <div class="thumbnail">
      <h3>spotify</h3>
-        <img alt="270x170" src="https://static.vecteezy.com/system/resources/previews/042/148/631/non_2x/spotify-logo-spotify-social-media-icon-free-png.png">
+        <img class="img-fluid h-100" alt="270x170" src="https://static.vecteezy.com/system/resources/previews/042/148/631/non_2x/spotify-logo-spotify-social-media-icon-free-png.png">
       
         <div class="caption">
           <h4>Stream music, and podcast.</h4>
@@ -61,7 +66,7 @@ Choose a stack
        <div class="col-md-3 text-center" data-tag="roblox" data-filter="games">
       <div class="thumbnail">
      <h3>Roblox</h3>
-        <img alt="270x170" src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Roblox_Logo_2022.jpg">
+        <img class="img-fluid h-100" alt="270x170" src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Roblox_Logo_2022.jpg">
         <div class="caption">
           <h4>Play stupid games that look like legos!</h4>
          
@@ -77,7 +82,7 @@ Choose a stack
     
       <div class="thumbnail">
      <h3>youtube</h3>
-        <img alt="270x170" src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/YouTube_full-color_icon_%282017%29.svg/512px-YouTube_full-color_icon_%282017%29.svg.png">
+        <img class="img-fluid h-100" alt="270x170" src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/YouTube_full-color_icon_%282017%29.svg/512px-YouTube_full-color_icon_%282017%29.svg.png">
       
         <div class="caption">
           <h4>Watch and post videos.</h4>
@@ -279,58 +284,45 @@ document.addEventListener('DOMContentLoaded', () => {
   
   
   
-  
-  
-  
-  
-  
+   localStorage.setItem('predefinedCards', JSON.stringify(predefinedCards));
 
-  // Store predefined cards in localStorage (invisible to the user)
-  localStorage.setItem('predefinedCards', JSON.stringify(predefinedCards));
-
-  // Handle adding specific cards
   document.querySelectorAll('.addSpecificCardBtn').forEach(button => {
+    const cardId = button.getAttribute('data-target');
+    const storedCards = JSON.parse(localStorage.getItem('addedCards')) || [];
+    const isCardAdded = storedCards.some(card => card.id === cardId);
+
+    // Update button text and color if card is already added
+    if (isCardAdded) {
+      button.textContent = 'You have this APP! (add another)';
+      button.classList.remove('btn-primary');
+      button.classList.add('btn-default');
+    }
+
     button.addEventListener('click', () => {
-      const cardId = button.getAttribute('data-target');
       const sectionDropdown = document.getElementById('sectionDropdown');
+      const sectionId = sectionDropdown.value;
 
-      if (!sectionDropdown) {
-        alert('No section dropdown found. Please ensure it exists on the page.');
-        return;
-      }
-
-      const sectionId = sectionDropdown.value; // Get the selected section ID
       if (!sectionId) {
         alert('Please select a section first.');
         return;
       }
 
-      // Find the card by ID in predefinedCards
       const cardToAdd = predefinedCards.find(card => card.id === cardId);
       if (!cardToAdd) {
         alert('Error: Card not found.');
         return;
       }
 
-      // Add the section assignment to the card
       cardToAdd.sectionId = sectionId;
 
-      // Save the card in localStorage under 'addedCards'
-      const storedCards = JSON.parse(localStorage.getItem('addedCards')) || [];
-      storedCards.push(cardToAdd);
-      localStorage.setItem('addedCards', JSON.stringify(storedCards));
+      const updatedStoredCards = JSON.parse(localStorage.getItem('addedCards')) || [];
+      updatedStoredCards.push(cardToAdd);
+      localStorage.setItem('addedCards', JSON.stringify(updatedStoredCards));
 
-      // Pass the modalId to the modal (for later use)
-      const modalId = cardToAdd.modalId; // Get modalId from the selected card
-
-      // Open modal and pass modalId for specific modal functionality
-      $('#myModal').on('show.bs.modal', function () {
-        // Now you can use modalId for custom functionality like loading buttons
-        console.log('Opening modal for modalId:', modalId);
-        loadButtons(modalId); // You should have a function like this to load specific content for the modal
-      });
-
-      alert(`Card "${cardToAdd.title}" added successfully to the selected section!`);
+      // Change button text to "Added" and update color
+      button.textContent = 'ADDED!';
+      button.classList.remove('btn-primary');
+      button.classList.add('btn-success');
     });
   });
 });
@@ -358,194 +350,11 @@ function populateSectionDropdown() {
 // Call this on page load to ensure the dropdown is populated
 populateSectionDropdown();
 </script>
-<script>
-  // Function to add a card to localStorage
-  function addCardToStorage(cardData) {
-    const storedCards = JSON.parse(localStorage.getItem('addedCards')) || [];
-    storedCards.push(cardData);
-    localStorage.setItem('addedCards', JSON.stringify(storedCards));
-    
-  }
 
-  // Function to remove a card from localStorage
-  function removeCardFromStorage(cardId) {
-    const storedCards = JSON.parse(localStorage.getItem('addedCards')) || [];
-    const updatedCards = storedCards.filter(card => card.id !== cardId);
-    localStorage.setItem('addedCards', JSON.stringify(updatedCards));
-    alert('App removed!');
-  }
 
-  // Function to handle adding/removing cards and updating the button text
-  function handleCardButtonClick(event) {
-    const button = event.target;
-    const cardData = {
-      id: button.dataset.id,
-      title: button.dataset.title,
-      image: button.dataset.image,
-      description: button.dataset.description,
-      category: button.dataset.category,
-      borderClass: button.dataset.borderClass,
-      textClass: button.dataset.textClass,
-      modal: button.dataset.modal
-      sectionId: document.getElementById('sectionDropdown').value,
-    };
 
-    // Check if card is already in localStorage
-    const storedCards = JSON.parse(localStorage.getItem('addedCards')) || [];
-    const cardExists = storedCards.some(card => card.id === cardData.id);
 
-    if (cardExists) {
-      // Remove the card and change button text back to "Add"
-      removeCardFromStorage(cardData.id);
-      button.textContent = 'Add ' + cardData.title;
-      updateButtonState(button, false); // Store button state as "Add"
-    } else {
-      // Add the card and change button text to "Remove"
-      addCardToStorage(cardData);
-      button.textContent = 'App added!';
-      updateButtonState(button, true); // Store button state as "Remove"
-    }
-  }
 
-  // Function to update the button state in localStorage
-  function updateButtonState(button, isAdded) {
-    const buttonStates = JSON.parse(localStorage.getItem('buttonStates')) || {};
-    buttonStates[button.dataset.id] = isAdded; // Store the state by button id
-    localStorage.setItem('buttonStates', JSON.stringify(buttonStates));
-  }
-
-  // Function to restore the button state on page load
-  function restoreButtonStates() {
-    const buttonStates = JSON.parse(localStorage.getItem('buttonStates')) || {};
-    document.querySelectorAll('.add-card-btn').forEach(button => {
-      const isAdded = buttonStates[button.dataset.id];
-      if (isAdded) {
-        button.textContent = 'Remove5';
-      } else {
-        button.textContent = 'Add ' + button.dataset.title;
-      }
-    });
-  }
-
-  // Event delegation for card button clicks
-  document.body.addEventListener('click', function(event) {
-    if (event.target.matches('.add-card-btn')) {
-      handleCardButtonClick(event);
-    }
-  });
-
-  // Restore the button states when the page loads
-  window.addEventListener('load', restoreButtonStates);
-</script>
-
-<script>
-window.onload = function() {
-  const storedCards = JSON.parse(localStorage.getItem('addedCards')) || [];
-  const buttons = document.querySelectorAll('.add-card-btn');
-  buttons.forEach(button => {
-    const buttonId = button.dataset.id;
-    if (storedCards.some(card => card.id == buttonId)) {
-      button.textContent = 'Remove app';
-    } else {
-      button.textContent = 'Add app';
-    }
-  });
-};
-
-</script>
-<script>
-  // Function to add a card to localStorage
-  function addCardToStorage(cardData) {
-    const storedCards = JSON.parse(localStorage.getItem('addedCards')) || [];
-    storedCards.push(cardData);
-    localStorage.setItem('addedCards', JSON.stringify(storedCards));
-  }
-
-  // Function to remove a card from localStorage
-  function removeCardFromStorage(cardId) {
-    const storedCards = JSON.parse(localStorage.getItem('addedCards')) || [];
-    const updatedCards = storedCards.filter(card => card.id !== cardId);
-    localStorage.setItem('addedCards', JSON.stringify(updatedCards));
-    alert('App removed!');
-  }
-
-  // Function to handle adding/removing cards and updating the button text
-  function handleCardButtonClick(event) {
-    const button = event.target;
-    const cardData = {
-      id: button.dataset.id,
-      title: button.dataset.title,
-      image: button.dataset.image,
-      description: button.dataset.description,
-      category: button.dataset.category,
-      borderClass: button.dataset.borderClass,
-      textClass: button.dataset.textClass,
-      modal: button.dataset.modal,
-      sectionId: document.getElementById('sectionDropdown').value,
-    };
-
-    // Check if card is already in localStorage
-    const storedCards = JSON.parse(localStorage.getItem('addedCards')) || [];
-    const cardExists = storedCards.some(card => card.id === cardData.id);
-
-    if (cardExists) {
-      // Remove the card and change button text back to "Add"
-      removeCardFromStorage(cardData.id);
-      button.textContent = 'Add ' + cardData.title;
-      updateButtonState(button, false); // Store button state as "Add"
-    } else {
-      // Add the card and change button text to "Remove"
-      addCardToStorage(cardData);
-      button.textContent = 'App added!';
-      updateButtonState(button, true); // Store button state as "Remove"
-    }
-  }
-
-  // Function to update the button state in localStorage
-  function updateButtonState(button, isAdded) {
-    const buttonStates = JSON.parse(localStorage.getItem('buttonStates')) || {};
-    buttonStates[button.dataset.id] = isAdded; // Store the state by button id
-    localStorage.setItem('buttonStates', JSON.stringify(buttonStates));
-  }
-
-  // Function to restore the button state on page load
-  function restoreButtonStates() {
-    const buttonStates = JSON.parse(localStorage.getItem('buttonStates')) || {};
-    document.querySelectorAll('.add-card-btn').forEach(button => {
-      const isAdded = buttonStates[button.dataset.id];
-      if (isAdded) {
-        button.textContent = 'Remove app';
-      } else {
-        button.textContent = 'Add app';
-      }
-    });
-  }
-
-  // Event delegation for card button clicks
-  document.body.addEventListener('click', function(event) {
-    if (event.target.matches('.add-card-btn')) {
-      handleCardButtonClick(event);
-    }
-  });
-
-  // Restore the button states when the page loads
-  window.addEventListener('load', restoreButtonStates);
-</script>
-
-<script>
-window.onload = function() {
-  const storedCards = JSON.parse(localStorage.getItem('addedCards')) || [];
-  const buttons = document.querySelectorAll('.add-card-btn');
-  buttons.forEach(button => {
-    const buttonId = button.dataset.id;
-    if (storedCards.some(card => card.id == buttonId)) {
-      button.textContent = 'Remove app';
-    } else {
-      button.textContent = 'Add app';
-    }
-  });
-};
-</script>
 
 <script>
 function populateSectionDropdown() {
@@ -597,4 +406,19 @@ document.querySelectorAll('.addSpecificCardBtn').forEach(button => {
 });
 
 </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
