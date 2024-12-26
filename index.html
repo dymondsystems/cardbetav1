@@ -1229,8 +1229,8 @@ body {
           
         </div>
         <div class="user-info">
-          <span class="user-name">Jhon
-            <strong>Smith</strong>
+          <span class="user-name">Demo
+            <strong>User</strong>
           </span>
           <span class="user-role">Administrator</span>
           <span class="user-status">
@@ -1243,7 +1243,9 @@ body {
       <div class="container text-center">
       <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addsection">
   New stack
-</button></div>
+</button>
+<a href="/cardbetav1/apps" class="btn btn-info" role="button">Add apps</a>
+</div>
 <br>
       
       <div class="sidebar-menu">
@@ -1254,7 +1256,7 @@ body {
           <li class="sidebar-dropdown">
             <a href="#">
               <i class="fa fa-tachometer"></i>
-              <span>Dashboard</span>
+              <span>Stacks</span>
               <span class="badge badge-pill badge-warning">New</span>
             </a>
            <!-- Sidebar Links Section -->
@@ -1490,7 +1492,9 @@ body {
 
  
 <div id="noSectionsPlaceholder" class="text-center" style="display: none;">
-  No sections available. Please add a section to get started.
+  Please create a stack to get started. <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addsection">
+  Create a stack
+</button>
 </div>
 
 
@@ -1889,7 +1893,8 @@ function loadSections() {
       
       </div>
      <div id="noCardsPlaceholder2" class="alert alert-info text-center" style="display: none;">
-  No cards available. Please add a card to this section.
+  Add an app to start building your stack.
+  <a href="/cardbetav1/apps" class="btn btn-success" role="button">Add app</a>
   </div>
     `;
     sectionsContainer.appendChild(sectionDiv);
@@ -2694,6 +2699,6 @@ $("#show-sidebar").click(function() {
 });
 </script>
 
-<div id="noCardsPlaceholder2" class="alert alert-info text-center" style="display: none;">
-  No cards available. Please add a card to this section.
+<div id="noCardsPlaceholder2" class="alert text-center" style="display: none;">
+  
   </div>
