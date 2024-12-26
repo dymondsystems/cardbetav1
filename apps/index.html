@@ -281,9 +281,6 @@ document.addEventListener('DOMContentLoaded', () => {
   ];
   
  
-  
-  
-  
    localStorage.setItem('predefinedCards', JSON.stringify(predefinedCards));
 
   document.querySelectorAll('.addSpecificCardBtn').forEach(button => {
@@ -291,12 +288,37 @@ document.addEventListener('DOMContentLoaded', () => {
     const storedCards = JSON.parse(localStorage.getItem('addedCards')) || [];
     const isCardAdded = storedCards.some(card => card.id === cardId);
 
-    // Update button text and color if card is already added
-    if (isCardAdded) {
-      button.textContent = 'You have this APP! (add another)';
-      button.classList.remove('btn-primary');
-      button.classList.add('btn-default');
-    }
+    const updateButtonUI = (added) => {
+      if (added) {
+        button.textContent = 'Added!';
+        button.classList.remove('btn-primary');
+        button.classList.add('btn-success');
+
+        // Add a "Remove" button below the "Added" button
+        if (!button.nextElementSibling || !button.nextElementSibling.classList.contains('remove-btn')) {
+          const removeButton = document.createElement('button');
+          removeButton.classList.add('btn', 'btn-danger', 'mt-2', 'remove-btn');
+          removeButton.textContent = 'Remove';
+          removeButton.addEventListener('click', () => {
+            removeCard(cardId, button, removeButton);
+          });
+          button.parentElement.appendChild(removeButton);
+        }
+      } else {
+        button.textContent = `Add to stack`;
+        button.classList.remove('btn-success');
+        button.classList.add('btn-default');
+
+        // Remove the "Remove" button if it exists
+        const removeButton = button.parentElement.querySelector('.remove-btn');
+        if (removeButton) {
+          removeButton.remove();
+        }
+      }
+    };
+
+    // Initial state check for button and remove button
+    updateButtonUI(isCardAdded);
 
     button.addEventListener('click', () => {
       const sectionDropdown = document.getElementById('sectionDropdown');
@@ -319,13 +341,22 @@ document.addEventListener('DOMContentLoaded', () => {
       updatedStoredCards.push(cardToAdd);
       localStorage.setItem('addedCards', JSON.stringify(updatedStoredCards));
 
-      // Change button text to "Added" and update color
-      button.textContent = 'ADDED!';
-      button.classList.remove('btn-primary');
-      button.classList.add('btn-success');
+      // Update UI to "Added" and show remove button
+      updateButtonUI(true);
     });
+
+    const removeCard = (id, addButton, removeButton) => {
+      let storedCards = JSON.parse(localStorage.getItem('addedCards')) || [];
+      storedCards = storedCards.filter(card => card.id !== id);
+      localStorage.setItem('addedCards', JSON.stringify(storedCards));
+
+      // Reset button UI and remove "Remove" button
+      updateButtonUI(false);
+    };
   });
 });
+
+
 
 </script>
 
