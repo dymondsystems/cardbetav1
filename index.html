@@ -2195,7 +2195,7 @@ function createButton({ url, name, size, openType }) {
   button.dataset.name = name;
   button.dataset.size = size;
   button.dataset.openType = openType;
-  button.innerHTML = `<i class='fa fa-external-link'></i><br>${name}`;
+  button.innerHTML = `<i class='fa fa-external-link-alt'></i><br>${name}`;
 
   button.onclick = () => {
     if (openType === 'newTab') {
@@ -2383,7 +2383,7 @@ function createButton({ url, name, size, openType }, modalId) {
   button.dataset.name = name;
   button.dataset.size = size;
   button.dataset.openType = openType;
-  button.innerHTML = `<i class='fa fa-external-link'></i><br>${name}`;
+  button.innerHTML = `<i class='fa fa-external-link-alt'></i><br>${name}`;
 
   button.onclick = () => {
     if (openType === 'newTab') {
