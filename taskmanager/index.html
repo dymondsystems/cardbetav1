@@ -1,0 +1,222 @@
+<!------ Include the Bootstrap and jQuery libraries ---------->
+
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<div class="container">
+    <div class="row">
+        <!-- Existing content -->
+        <div class="col-md-12">
+            <div class="spacer"></div>
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">List of ongoing projects</h5>
+                    <!-- Existing project cards -->
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-md-12">
+            <div class="spacer"></div>
+            <div class="card">
+                <div class="card-header">
+                    <h5>Atomic Bicycle V1</h5>
+                    <ul class="nav nav-tabs card-header-tabs"> 
+                        <li class="nav-item">
+                            <a class="nav-link active" id="stat-1-tab" data-toggle="tab" href="#stat-1" role="tab" aria-controls="stat-1" aria-selected="true">Statistics</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="task-1-tab" data-toggle="tab" href="#task-1" role="tab" aria-controls="task-1" aria-selected="false">Tasks</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="team-1-tab" data-toggle="tab" href="#team-1" role="tab" aria-controls="team-1" aria-selected="false">Team</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="card-body">
+                    <div class="tab-content" id="myTabContent">
+                        <!-- Task Tab -->
+                        <div class="tab-pane fade" id="task-1" role="tabpanel" aria-labelledby="task-1-tab">
+                            <div class="d-flex justify-content-between">
+                                <h6>Task List</h6>
+                                <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#addTaskModal">Add Task</button>
+                            </div>
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Description</th>
+                                        <th scope="col">State</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="taskTableBody">
+                                    <!-- Existing tasks -->
+                                    <tr>
+                                        <th scope="row">1</th>
+                                        <td>Conception</td>
+                                        <td>Make studies on UX design, technology needs, and budget.</td>
+                                        <td><span class="badge badge-pill badge-success">Ended</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <!-- Team Tab -->
+                        <div class="tab-pane fade" id="team-1" role="tabpanel" aria-labelledby="team-1-tab">
+                            <div class="d-flex justify-content-between">
+                                <h6>Team Members</h6>
+                                <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#addTeamModal">Add Member</button>
+                            </div>
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Role</th>
+                                        <th scope="col">Email</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="teamTableBody">
+                                    <!-- Existing members -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> 
+    </div>
+</div>
+
+<!-- Add Task Modal -->
+<div class="modal fade" id="addTaskModal" tabindex="-1" role="dialog" aria-labelledby="addTaskModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addTaskModalLabel">Add New Task</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="taskForm">
+                    <div class="form-group">
+                        <label for="taskName">Task Name</label>
+                        <input type="text" class="form-control" id="taskName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="taskDescription">Task Description</label>
+                        <textarea class="form-control" id="taskDescription" rows="3" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="taskState">Task State</label>
+                        <select class="form-control" id="taskState">
+                            <option value="To do">To do</option>
+                            <option value="Work in progress">Work in progress</option>
+                            <option value="Ended">Ended</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Add Task</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Add Team Modal -->
+<div class="modal fade" id="addTeamModal" tabindex="-1" role="dialog" aria-labelledby="addTeamModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addTeamModalLabel">Add New Team Member</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="teamForm">
+                    <div class="form-group">
+                        <label for="teamName">Name</label>
+                        <input type="text" class="form-control" id="teamName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="teamRole">Role</label>
+                        <input type="text" class="form-control" id="teamRole" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="teamEmail">Email</label>
+                        <input type="email" class="form-control" id="teamEmail" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Add Member</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        let taskId = 2; // Start after existing tasks
+        let memberId = 1; // Start for team members
+
+        // Add Task
+        $("#taskForm").on("submit", function (event) {
+            event.preventDefault();
+
+            const taskName = $("#taskName").val();
+            const taskDescription = $("#taskDescription").val();
+            const taskState = $("#taskState").val();
+
+            const stateBadgeClass = taskState === "Ended" ? "badge-success" : 
+                                    taskState === "Work in progress" ? "badge-warning" : 
+                                    "badge-primary";
+
+            const newRow = `
+                <tr>
+                    <th scope="row">${taskId}</th>
+                    <td>${taskName}</td>
+                    <td>${taskDescription}</td>
+                    <td><span class="badge badge-pill ${stateBadgeClass}">${taskState}</span></td>
+                </tr>
+            `;
+
+            $("#taskTableBody").append(newRow);
+            taskId++;
+
+            $("#addTaskModal").modal("hide");
+            $("#taskForm")[0].reset();
+        });
+
+        // Add Team Member
+        $("#teamForm").on("submit", function (event) {
+            event.preventDefault();
+
+            const teamName = $("#teamName").val();
+            const teamRole = $("#teamRole").val();
+            const teamEmail = $("#teamEmail").val();
+
+            const newRow = `
+                <tr>
+                    <th scope="row">${memberId}</th>
+                    <td>${teamName}</td>
+                    <td>${teamRole}</td>
+                    <td>${teamEmail}</td>
+                </tr>
+            `;
+
+            $("#teamTableBody").append(newRow);
+            memberId++;
+
+            $("#addTeamModal").modal("hide");
+            $("#teamForm")[0].reset();
+        });
+    });
+</script>
