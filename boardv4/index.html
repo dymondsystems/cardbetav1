@@ -2638,7 +2638,7 @@ function loadCards() {
       storedCards.forEach(card => {
         if (card.sectionId === section.id) {
           const cardDiv = document.createElement('div');
-          cardDiv.classList.add('card-item');
+          cardDiv.classList.add('col-md-3', 'card-item');
          cardDiv.innerHTML = `
         <div class="card border-secondary mb-3">
           <div class="card-body">
