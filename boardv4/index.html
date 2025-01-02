@@ -2639,6 +2639,12 @@ function loadCards() {
         if (card.sectionId === section.id) {
           const cardDiv = document.createElement('div');
           cardDiv.classList.add('col-md-3', 'card-item');
+		cardDiv.dataset.id = card.id;
+      cardDiv.dataset.title = card.title;
+      cardDiv.dataset.image = card.image;
+      cardDiv.dataset.description = card.description;
+      cardDiv.dataset.category = card.category;
+      cardDiv.dataset.modalId = card.modalId;
          cardDiv.innerHTML = `
         <div class="card border-secondary mb-3">
           <div class="card-body">
