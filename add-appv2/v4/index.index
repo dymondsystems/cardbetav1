@@ -1,0 +1,356 @@
+
+ <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <style>
+  img{
+  width: 150px;
+  height: 250px;
+  }
+  .thumbnail{
+  
+  height:350px;
+  {
+  </style>
+
+
+
+
+<div class="container wrapper">
+  <br>
+  <h2>Find an add apps</h2>
+  <hr>
+  <div class="pull-right">
+    <button class="btn btn-small btn-primary filter-button" data-toggle="portfilter" data-filter="all">All</button>
+    <button class="btn btn-small btn-primary filter-button" data-toggle="portfilter" data-filter="games">Games</button>
+    <button class="btn btn-small btn-primary filter-button" data-toggle="portfilter" data-filter="social media">Social Media</button>
+    <button class="btn btn-small btn-primary filter-button" data-toggle="portfilter" data-filter="marketing">Marketing</button>
+  </div>
+  <div class="clearfix"></div>
+  <br>
+Choose a stack
+<select id="sectionDropdown" class="form-control">
+  <!-- Dynamically populated options -->
+</select>
+<br>
+  <!-- Search Box -->
+  <div class="form-group">
+    <input id="search-box" type="text" class="form-control" placeholder="Search Apps..." />
+  </div>
+  <center><a href="/cardbetav1" class="btn btn-lg btn-success">Back to dashboard</a></center>
+  <br>
+  
+
+  <div class="thumbnails gallery">
+    <!-- Example with separate data-filter and data-tag -->
+    <div class="col-md-3 text-center" data-tag="spotify" data-filter="social media">
+    
+      <div class="thumbnail">
+     <h3>spotify</h3>
+        <img class="img-fluid h-100" alt="270x170" src="https://static.vecteezy.com/system/resources/previews/042/148/631/non_2x/spotify-logo-spotify-social-media-icon-free-png.png">
+      
+        <div class="caption">
+          <h4>Stream music, and podcast.</h4>
+          
+
+          <button type="button" data-target="1" class="btn btn-primary addSpecificCardBtn">
+  Add Spotify
+</button>
+        </div>
+      </div>
+    </div>
+ 
+  </div>
+</div>
+
+<script>
+  let activeFilter = 'all'; // Track the currently active filter
+
+  // Update activeFilter when a filter button is clicked
+  $(document).on("click", ".filter-button", function() {
+    activeFilter = $(this).data("filter").toLowerCase();
+
+    // Show/hide items based on the active filter
+    $('.gallery .col-md-3').each(function() {
+      var filterTag = $(this).data('filter').toLowerCase();
+      if (filterTag === activeFilter || activeFilter === 'all') {
+        $(this).fadeIn();
+      } else {
+        $(this).fadeOut();
+      }
+    });
+  });
+
+  // Search filter logic with respect to active filter
+  $(document).on('input', '#search-box', function() {
+    var query = $(this).val().toLowerCase();
+
+    $('.gallery .col-md-3').each(function() {
+      var tags = $(this).data('tag').toLowerCase().split(',');
+      var filterTag = $(this).data('filter').toLowerCase();
+
+      // Check if the item matches the search query and active filter
+      if (
+        (activeFilter === 'all' || filterTag === activeFilter) &&
+        (tags.some(tag => tag.includes(query)) || query === '')
+      ) {
+        $(this).fadeIn();
+      } else {
+        $(this).fadeOut();
+      }
+    });
+  });
+</script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  // Predefined card data with `data-tag` and `data-filter` attributes added
+  const predefinedCards = [
+    {
+      id: '1',
+      title: 'Spotify',
+      description: 'Stream music and podcasts.',
+      image: 'https://static.vecteezy.com/system/resources/previews/042/148/631/non_2x/spotify-logo-spotify-social-media-icon-free-png.png',
+      category: 'Entertainment',
+      tag: 'music,streaming', // data-tag
+      filter: 'entertainment', // data-filter
+      borderClass: 'border-primary',
+      textClass: 'text-primary',
+      modalId: '1',
+    },
+    {
+      id: '2',
+      title: 'Roblox',
+      description: 'Stupid games that look like legos',
+      image: 'https://upload.wikimedia.org/wikipedia/commons/7/7e/Roblox_Logo_2022.jpg',
+      category: 'Gaming',
+      tag: 'games,fun', // data-tag
+      filter: 'gaming', // data-filter
+      borderClass: 'border-danger',
+      textClass: 'text-danger',
+      modalId: '2',
+    },
+    {
+      id: '3',
+      title: 'Youtube',
+      description: 'Watch and post videos.',
+      image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/YouTube_full-color_icon_%282017%29.svg/512px-YouTube_full-color_icon_%282017%29.svg.png',
+      category: 'Streaming',
+      tag: 'videos,streaming', // data-tag
+      filter: 'streaming', // data-filter
+      borderClass: 'border-danger',
+      textClass: 'text-danger',
+      modalId: '3',
+      link:'test',
+    },
+    // Add more predefined cards here...
+  ];
+
+  // Save predefined cards to localStorage
+  localStorage.setItem('predefinedCards', JSON.stringify(predefinedCards));
+
+  // Dynamically render the cards in the gallery
+  const galleryContainer = document.querySelector('.gallery');
+  galleryContainer.innerHTML = ''; // Clear any existing content
+
+  predefinedCards.forEach(card => {
+    const cardHtml = `
+      <div 
+        class="col-md-3 text-center card-item ${card.borderClass}" 
+        data-tag="${card.tag}" 
+        data-filter="${card.filter}">
+        <div class="thumbnail">
+          <h3>${card.title}</h3>
+          <img class="img-fluid h-100" alt="${card.title}" src="${card.image}">
+          <div class="caption">
+            <h4>${card.description}</h4>
+            <button 
+              type="button" 
+              data-target="${card.id}" 
+              class="btn btn-primary addSpecificCardBtn">
+              Add to stack
+            </button>
+            <a href="example.com/${card.link}">test</a> 
+             
+          </div>
+        </div>
+      </div>
+    `;
+    galleryContainer.innerHTML += cardHtml;
+  });
+  
+ 
+   localStorage.setItem('predefinedCards', JSON.stringify(predefinedCards));
+
+  document.querySelectorAll('.addSpecificCardBtn').forEach(button => {
+    const cardId = button.getAttribute('data-target');
+    const storedCards = JSON.parse(localStorage.getItem('addedCards')) || [];
+    const isCardAdded = storedCards.some(card => card.id === cardId);
+
+    const updateButtonUI = (added) => {
+      if (added) {
+        button.textContent = 'Added!';
+        button.classList.remove('btn-primary');
+        button.classList.add('btn-success');
+
+        // Add a "Remove" button below the "Added" button
+        if (!button.nextElementSibling || !button.nextElementSibling.classList.contains('remove-btn')) {
+          const removeButton = document.createElement('button');
+          removeButton.classList.add('btn', 'btn-danger', 'mt-2', 'remove-btn');
+          removeButton.textContent = 'Remove';
+          removeButton.addEventListener('click', () => {
+            removeCard(cardId, button, removeButton);
+          });
+          button.parentElement.appendChild(removeButton);
+        }
+      } else {
+        button.textContent = `Add to stack`;
+        button.classList.remove('btn-success');
+        button.classList.add('btn-default');
+
+        // Remove the "Remove" button if it exists
+        const removeButton = button.parentElement.querySelector('.remove-btn');
+        if (removeButton) {
+          removeButton.remove();
+        }
+      }
+    };
+
+    // Initial state check for button and remove button
+    updateButtonUI(isCardAdded);
+
+    button.addEventListener('click', () => {
+      const sectionDropdown = document.getElementById('sectionDropdown');
+      const sectionId = sectionDropdown.value;
+
+      if (!sectionId) {
+        alert('Please select a section first.');
+        return;
+      }
+
+      const cardToAdd = predefinedCards.find(card => card.id === cardId);
+      if (!cardToAdd) {
+        alert('Error: Card not found.');
+        return;
+      }
+
+      cardToAdd.sectionId = sectionId;
+
+      const updatedStoredCards = JSON.parse(localStorage.getItem('addedCards')) || [];
+      updatedStoredCards.push(cardToAdd);
+      localStorage.setItem('addedCards', JSON.stringify(updatedStoredCards));
+
+      // Update UI to "Added" and show remove button
+      updateButtonUI(true);
+    });
+
+    const removeCard = (id, addButton, removeButton) => {
+      let storedCards = JSON.parse(localStorage.getItem('addedCards')) || [];
+      storedCards = storedCards.filter(card => card.id !== id);
+      localStorage.setItem('addedCards', JSON.stringify(storedCards));
+
+      // Reset button UI and remove "Remove" button
+      updateButtonUI(false);
+    };
+  });
+});
+
+
+
+</script>
+
+<script>
+function populateSectionDropdown() {
+  const sections = JSON.parse(localStorage.getItem('sections')) || [];
+  const dropdown = document.getElementById('sectionDropdown');
+  dropdown.innerHTML = ''; // Clear existing options
+
+  sections.forEach(section => {
+    const option = document.createElement('option');
+    option.value = section.id;
+    option.textContent = section.title;
+    dropdown.appendChild(option);
+  });
+
+  if (sections.length === 0) {
+    alert('No sections available. Please create sections first.');
+  }
+}
+
+// Call this on page load to ensure the dropdown is populated
+populateSectionDropdown();
+</script>
+
+
+
+
+
+
+<script>
+function populateSectionDropdown() {
+  const sections = JSON.parse(localStorage.getItem('sections')) || [];
+  const dropdown = document.getElementById('sectionDropdown');
+  dropdown.innerHTML = ''; // Clear existing options
+
+  sections.forEach(section => {
+    const option = document.createElement('option');
+    option.value = section.id;
+    option.textContent = section.title;
+    dropdown.appendChild(option);
+  });
+
+  if (sections.length === 0) {
+    alert('No sections available. Please create sections first.');
+  }
+}
+</script>
+
+<script>
+document.querySelectorAll('.addSpecificCardBtn').forEach(button => {
+  button.addEventListener('click', () => {
+    const cardId = button.getAttribute('data-target');
+    const sectionDropdown = document.getElementById('sectionDropdown');
+    const sectionId = sectionDropdown.value;
+
+    if (!sectionId) {
+      alert('Please select a section first.');
+      return;
+    }
+
+    const cardToAdd = predefinedCards.find(card => card.id === cardId);
+    if (!cardToAdd) {
+      alert('Error: Card not found.');
+      return;
+    }
+
+    // Add the section ID to the card
+    cardToAdd.sectionId = sectionId;
+
+    // Save the card to localStorage
+    const storedCards = JSON.parse(localStorage.getItem('addedCards')) || [];
+    storedCards.push(cardToAdd);
+    localStorage.setItem('addedCards', JSON.stringify(storedCards));
+
+    alert(`Card "${cardToAdd.title}" added to section "${sectionDropdown.options[sectionDropdown.selectedIndex].text}"!`);
+  });
+});
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
