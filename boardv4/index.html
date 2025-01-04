@@ -2068,7 +2068,48 @@ function loadCards() {
     placeholder2.style.display = 'none';
   }
   
-  
+  storedCards.forEach(card => {
+    const sectionContainer = document.getElementById(`cards-${card.sectionId}`);
+    if (sectionContainer) {
+      const cardDiv = document.createElement('div');
+      cardDiv.classList.add('col-md-3', 'card-item');
+      cardDiv.dataset.id = card.id;
+      cardDiv.dataset.title = card.title;
+      cardDiv.dataset.image = card.image;
+      cardDiv.dataset.description = card.description;
+      cardDiv.dataset.category = card.category;
+      cardDiv.dataset.modalId = card.modalId;
+
+      cardDiv.innerHTML = `
+        <div class="card border-secondary mb-3">
+          <div class="card-body">
+            <div class="dropdown">
+              <i class="fa fa-ellipsis-v" aria-hidden="true" data-toggle="dropdown" style="float: right;"></i>
+              <div class="dropdown-menu">
+                <a class="dropdown-item" data-toggle="modal" href="#accountinfo" onclick="showAccountInfo('${card.id}')">Add account info</a>
+                <a class="dropdown-item" href="#">Edit category</a>
+                <a class="dropdown-item text-danger" href="#" onclick="removeCard('${card.id}')">Remove</a>
+              </div>
+            </div>
+            <center><img src="${card.image}" alt="${card.title}" class="img-fluid" style="width: 80px; height: 80px;">
+            <h5 class="mt-2">${card.title}</h5>
+            <p>${card.description}</p>
+            <button 
+              type="button" 
+              class="btn btn-primary mt-2" 
+              data-toggle="modal" 
+              data-target="#myModal" 
+              data-title="${card.title}" 
+              data-image="${card.image}" 
+              data-modal="${card.modalId}">
+              Open 
+            </button></center>
+          </div>
+        </div>
+      `;
+      sectionContainer.appendChild(cardDiv);
+    }
+  }); 
   
   
   
