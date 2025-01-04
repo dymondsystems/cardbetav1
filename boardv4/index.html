@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -1843,10 +1842,6 @@ body {
 
 	
 
-
-
-  
-
     
 
 
@@ -1944,13 +1939,12 @@ function loadSections() {
         <!-- Cards will be dynamically inserted here -->
       
       </div>
-     <div id="no-cards-${section.id}" class="alert text-center " style="display: none;">
-        Add the first app to this stack!
-        <br>
-        <br>
-        <a href="/cardbetav1/add-appv2/v3/?sectionId=${section.id}" class="btn btn-success" role="button">Add app</a>
-  
-      </div>
+     <div id="noCardsPlaceholder2" class="alert alert-info text-center" style="display: none; margin-top: 50px; margin-bottom: 150px; ">
+     <h4>You've created your first stack!</h4>
+  Add an app to start building out your stack.
+  <br>
+  <a href="/cardbetav1/add-appv2/v3/?sectionId=${section.id}" class="btn btn-success" role="button">Add app</a>
+  </div>
     `;
     sectionsContainer.appendChild(sectionDiv);
 
@@ -2068,6 +2062,12 @@ function loadCards() {
     placeholder2.style.display = 'none';
   }
   
+  
+  
+  
+  
+  
+  
   storedCards.forEach(card => {
     const sectionContainer = document.getElementById(`cards-${card.sectionId}`);
     if (sectionContainer) {
@@ -2109,12 +2109,7 @@ function loadCards() {
       `;
       sectionContainer.appendChild(cardDiv);
     }
-  }); 
-  
-  
-  
-  
-  
+  });
 
   // Attach modal update functionality after cards are loaded
   attachModalTitleUpdate();
@@ -2372,7 +2367,7 @@ $('#myModal').on('hidden.bs.modal', function () {
 function loadButtons(modalId) {
   launchButtonsContainer.innerHTML = '';  // Clear current buttons
 
-  // Predefined buttons for each modal
+   // Predefined buttons for each modal
   const predefinedButtons = {
     1: [
       { url: 'https://promptgpt.stackboard.one/', name: 'Open promptGPT', size: 'medium', openType: 'newWindow' }
@@ -2657,81 +2652,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 </script>
-<script>
-function checkSectionCards(sectionId) {
-  const sectionContainer = document.getElementById(`cards-${sectionId}`);
-  const noCardsDiv = document.getElementById(`no-cards-${sectionId}`);
-
-  if (sectionContainer && noCardsDiv) {
-    const hasCards = sectionContainer.querySelectorAll('.card-item').length > 0;
-    noCardsDiv.style.display = hasCards ? 'none' : 'block';
-  }
-}
-
-function loadCards() {
-  const storedCards = JSON.parse(localStorage.getItem('addedCards')) || [];
-  const sections = JSON.parse(localStorage.getItem('sections')) || [];
-
-  sections.forEach(section => {
-    const sectionContainer = document.getElementById(`cards-${section.id}`);
-    if (sectionContainer) {
-      sectionContainer.innerHTML = ''; // Clear existing cards
-      storedCards.forEach(card => {
-        if (card.sectionId === section.id) {
-          const cardDiv = document.createElement('div');
-          cardDiv.classList.add('col-md-3', 'card-item');
-		cardDiv.dataset.id = card.id;
-      cardDiv.dataset.title = card.title;
-      cardDiv.dataset.image = card.image;
-      cardDiv.dataset.description = card.description;
-      cardDiv.dataset.category = card.category;
-      cardDiv.dataset.modalId = card.modalId;
-         cardDiv.innerHTML = `
-        <div class="card border-secondary mb-3">
-          <div class="card-body">
-            <div class="dropdown">
-              <i class="fa fa-ellipsis-v" aria-hidden="true" data-toggle="dropdown" style="float: right;"></i>
-              <div class="dropdown-menu">
-                <a class="dropdown-item" data-toggle="modal" href="#accountinfo" onclick="showAccountInfo('${card.id}')">Add account info</a>
-                <a class="dropdown-item" href="#">Edit category</a>
-                <a class="dropdown-item text-danger" href="#" onclick="removeCard('${card.id}')">Remove</a>
-              </div>
-            </div>
-            <center><img src="${card.image}" alt="${card.title}" class="img-fluid" style="width: 80px; height: 80px;">
-            <h5 class="mt-2">${card.title}</h5>
-            <p>${card.description}</p>
-            <button 
-              type="button" 
-              class="btn btn-primary mt-2" 
-              data-toggle="modal" 
-              data-target="#myModal" 
-              data-title="${card.title}" 
-              data-image="${card.image}" 
-              data-modal="${card.modalId}">
-              Open 
-            </button></center>
-          </div>
-        </div>
-          `;
-          sectionContainer.appendChild(cardDiv);
-        }
-      });
-
-      checkSectionCards(section.id); // Check for "no cards" div visibility
-    }
-  });
-}
-
-
-</script>
-
-
-
-
-
-
-
-
 
 <script>
 document.getElementById('filterInput').addEventListener('input', function () {
@@ -2857,8 +2777,12 @@ $("#show-sidebar").click(function() {
 document.getElementById('closeWindowButton').onclick = function() {
   if (openedWindow) {
     openedWindow.close();
-
+  } else {
+    alert("No window is currently open.");
+  }
 };
 </script>
 
-
+<div id="noCardsPlaceholder2" style="display: none;">
+  
+  </div>
