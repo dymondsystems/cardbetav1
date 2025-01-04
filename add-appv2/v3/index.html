@@ -6,11 +6,18 @@
   <title>User Page</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  
+  <style>
+  img{
+  width: 100px;
+  height: 100px;
+  }
+  </style> 
 </head>
 <body>
 
   <div class="container">
-    <h2>User Page</h2>
+    <h2>Apps</h2>
     <hr>
 
     <div class="pull-right">
@@ -45,8 +52,7 @@
   <script>
     // Sample predefined cards
     const predefinedCards = [
-      { id: '3', title: 'Spotify', description: 'Stream music and podcasts.', tag: 'music,streaming', filter: 'social media', image: 'https://static.vecteezy.com/system/resources/previews/042/148/631/non_2x/spotify-logo-spotify-social-media-icon-free-png.png' },
-      { id: '2', title: 'Roblox', description: 'Stupid games that look like legos', tag: 'games,fun', filter: 'games', image: 'https://upload.wikimedia.org/wikipedia/commons/7/7e/Roblox_Logo_2022.jpg' },
+      
        { id: '1',
       title: 'PromptGPT',
       description: 'Manage chatGPT prompts: by stackboard',
@@ -58,6 +64,100 @@
       textClass: 'text-primary',
       modalId: '1',
     },
+    
+    { id: '2',
+      title: 'Chat GPT',
+      description: 'Manage chatGPT prompts: by stackboard',
+      image: 'https://1000logos.net/wp-content/uploads/2023/02/ChatGPT-Logo.png',
+      category: 'Entertainment',
+      tag: 'chat, ai, gpt, bot', // data-tag
+      filter: 'entertainment', // data-filter
+      borderClass: 'border-primary',
+      textClass: 'text-primary',
+      modalId: '2',
+    },
+    
+    { id: '3',
+      title: 'Github',
+      description: 'Manage your code base',
+      image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQhcVrL5XiyI9tM5z8mYG9oSL76qEIV-JRH_A&s',
+      category: 'Code, development',
+      tag: 'github, code, development, html', // data-tag
+      filter: 'development', // data-filter
+      borderClass: 'border-primary',
+      textClass: 'text-primary',
+      modalId: '3',
+    },
+    { id: '4',
+      title: 'Stack editor',
+      description: 'Simple front end editor',
+      image: 'https://discourse-user-assets.s3.amazonaws.com/original/2X/d/df30640741461569071875cf4ff6cad9924f8b32.png',
+      category: 'development',
+      tag: 'code, editor, html,css, javascript,python', // data-tag
+      filter: 'development', // data-filter
+      borderClass: 'border-primary',
+      textClass: 'text-primary',
+      modalId: '4',
+    },
+    { id: '5',
+      title: 'google',
+      description: 'Search the web',
+      image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Google_%22G%22_logo.svg/800px-Google_%22G%22_logo.svg.png',
+      category: 'Entertainment',
+      tag: 'google, search', // data-tag
+      filter: 'search', // data-filter
+      borderClass: 'border-primary',
+      textClass: 'text-primary',
+      modalId: '5',
+    },
+    
+    { id: '6',
+      title: 'google docs',
+      description: 'Manage documents and more',
+      image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQpXYkEqKR1Iwm4ZIsDgW_GVQlODN4T_vkRFQ&s',
+      category: 'documents',
+      tag: 'docs, files, forms', // data-tag
+      filter: 'business', // data-filter
+      borderClass: 'border-primary',
+      textClass: 'text-primary',
+      modalId: '6',
+    },
+    { id: '7',
+      title: 'Gmail',
+      description: 'Email client',
+      image: 'https://standfirst-designweek-production.imgix.net/uploads/2020/10/07113122/gmail-1.jpg?fit=crop&crop=faces&q=80&auto=compress,format&w=364&h=243&dpr=2.625',
+      category: 'business',
+      tag: 'mail, gmail', // data-tag
+      filter: 'mail', // data-filter
+      borderClass: 'border-primary',
+      textClass: 'text-primary',
+      modalId: '7',
+    },
+      { id: '8',
+      title: 'Font awesome',
+      description: 'Email client',
+      image: 'https://avatars.githubusercontent.com/u/1505683?v=4',
+      category: 'business',
+      tag: 'fonts, icons, design,development', // data-tag
+      filter: 'design', // data-filter
+      borderClass: 'border-primary',
+      textClass: 'text-primary',
+      modalId: '8',
+    },
+    
+      { id: '9',
+      title: 'tryit editor',
+      description: 'Simple front end editor',
+      image: 'https://d4.alternativeto.net/J2fiVl69ZFbPicxXE0lKoujQcbee8jxBUOKihh0BNws/rs:fit:280:280:0/g:ce:0:0/exar:1/YWJzOi8vZGlzdC9pY29ucy93M3NjaG9vbHNfMjMyMTk0LnBuZw.png',
+      category: 'development',
+      tag: 'html, code, editor', // data-tag
+      filter: 'development', // data-filter
+      borderClass: 'border-primary',
+      textClass: 'text-primary',
+      modalId: '9',
+    },
+    
+    
       // Add more predefined cards...
     ];
 
@@ -75,7 +175,7 @@
       });
 
       if (sections.length === 0) {
-        alert('No sections available. Please create sections first.');
+        alert('Please create a stack first.');
       }
     }
 
