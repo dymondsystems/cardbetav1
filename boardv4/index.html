@@ -2398,10 +2398,13 @@ function loadButtons(modalId) {
     ],
     10: [
       { url: 'https://gemini.google.com/app', name: 'open Gemini', size: 'large', openType: 'newWindow' }
-    ]  
+    ],
+    11: [
+      { url: 'https://github.com/copilot', name: 'open Copilot', size: 'large', openType: 'newWindow' }
+    ]
     
   };
-
+https://github.com/copilot
   // Get predefined buttons and saved buttons from localStorage
   const predefined = predefinedButtons[modalId] || [];
   const savedButtons = JSON.parse(localStorage.getItem(`launchButtons_${modalId}`)) || [];
