@@ -1,32 +1,60 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>User Page</title>
+  
+  
+    
+  
+  
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+
+
   
   <style>
   img{
   width: 100px;
   height: 100px;
   }
+  
+  .thumbnail{
+  
+ height:320px
+ }
+ 
+
+
+
   </style> 
 </head>
 <body>
 
+ 
+
   <div class="container">
     <h2>Apps</h2>
+    
+    <div class="container">
+  <nav class="navbar " id="mNavbar">
+  <center>
+<a href="https://dymond.systems/cardbetav1/boardv4/" class="btn btn-success"style="left:0px; margin-top:0px; font-size: 20px;">Back to dashbord</a></center>
+  </nav></div>
+   
     <hr>
 
     <div class="pull-right">
       <button class="btn btn-primary filter-button" data-filter="all">All</button>
-      <button class="btn btn-primary filter-button" data-filter="games">Games</button>
-      <button class="btn btn-primary filter-button" data-filter="social media">Social Media</button>
-      <button class="btn btn-primary filter-button" data-filter="marketing">Marketing</button>
+      <button class="btn btn-primary filter-button" data-filter="business">Business</button>
+      <button class="btn btn-primary filter-button" data-filter="ai">Ai</button>
+      <button class="btn btn-primary filter-button" data-filter="development">Development</button>
     </div>
-
+ 
     <br><br>
 
     <h3>Choose a Section</h3>
@@ -42,13 +70,57 @@
     </div>
 
     <br>
-    <div class="button sticky-top" style="z-index: 1;">
-<center><a href="https://dymond.systems/cardbetav1/boardv4/" type="button" class="btn btn-success">Back to dashbord</a></center></div>
+   
+    
+    
+
     <div class="gallery">
       <!-- Cards will be populated here -->
     </div>
 
   </div>
+  
+  <script>
+  let activeFilter = 'all'; // Track the currently active filter
+
+  // Update activeFilter when a filter button is clicked
+  $(document).on("click", ".filter-button", function() {
+    activeFilter = $(this).data("filter").toLowerCase();
+
+    // Show/hide items based on the active filter
+    $('.gallery .col-md-3').each(function() {
+      var filterTag = $(this).data('filter').toLowerCase();
+      if (filterTag === activeFilter || activeFilter === 'all') {
+        $(this).fadeIn();
+      } else {
+        $(this).fadeOut();
+      }
+    });
+  });
+
+  // Search filter logic with respect to active filter
+  $(document).on('input', '#search-box', function() {
+    var query = $(this).val().toLowerCase();
+
+    $('.gallery .col-md-3').each(function() {
+      var tags = $(this).data('tag').toLowerCase().split(',');
+      var filterTag = $(this).data('filter').toLowerCase();
+
+      // Check if the item matches the search query and active filter
+      if (
+        (activeFilter === 'all' || filterTag === activeFilter) &&
+        (tags.some(tag => tag.includes(query)) || query === '')
+      ) {
+        $(this).fadeIn();
+      } else {
+        $(this).fadeOut();
+      }
+    });
+  });
+</script>
+  
+  
+  
 
   <script>
     // Sample predefined cards
@@ -58,9 +130,9 @@
       title: 'PromptGPT',
       description: 'Manage chatGPT prompts: by stackboard',
       image: 'https://prompto.chat/assets/img/img.png?v=2',
-      category: 'Entertainment',
+      category: 'Ai tool',
       tag: 'chat, ai, gpt, bot', // data-tag
-      filter: 'entertainment', // data-filter
+      filter: 'ai', // data-filter
       borderClass: 'border-primary',
       textClass: 'text-primary',
       modalId: '1',
@@ -72,7 +144,7 @@
       image: 'https://cdn.iconscout.com/icon/free/png-256/free-chatgpt-icon-download-in-svg-png-gif-file-formats--ai-technology-artificial-intelligence-pack-science-icons-7576880.png?f=webp&w=256',
       category: 'Entertainment',
       tag: 'chat, ai, gpt, bot', // data-tag
-      filter: 'entertainment', // data-filter
+      filter: 'ai', // data-filter
       borderClass: 'border-primary',
       textClass: 'text-primary',
       modalId: '2',
@@ -106,7 +178,7 @@
       image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Google_%22G%22_logo.svg/800px-Google_%22G%22_logo.svg.png',
       category: 'Entertainment',
       tag: 'google, search', // data-tag
-      filter: 'search', // data-filter
+      filter: 'business', // data-filter
       borderClass: 'border-primary',
       textClass: 'text-primary',
       modalId: '5',
@@ -129,7 +201,7 @@
       image: 'https://standfirst-designweek-production.imgix.net/uploads/2020/10/07113122/gmail-1.jpg?fit=crop&crop=faces&q=80&auto=compress,format&w=364&h=243&dpr=2.625',
       category: 'business',
       tag: 'mail, gmail', // data-tag
-      filter: 'mail', // data-filter
+      filter: 'business', // data-filter
       borderClass: 'border-primary',
       textClass: 'text-primary',
       modalId: '7',
@@ -140,7 +212,7 @@
       image: 'https://avatars.githubusercontent.com/u/1505683?v=4',
       category: 'business',
       tag: 'fonts, icons, design,development', // data-tag
-      filter: 'design', // data-filter
+      filter: 'development', // data-filter
       borderClass: 'border-primary',
       textClass: 'text-primary',
       modalId: '8',
@@ -163,7 +235,7 @@
       image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcThr7qrIazsvZwJuw-uZCtLzIjaAyVW_ZrlEQ&s',
       category: 'Ai chat',
       tag: 'ai,chat,bot', // data-tag
-      filter: 'Ai', // data-filter
+      filter: 'ai', // data-filter
       borderClass: 'border-primary',
       textClass: 'text-primary',
       modalId: '10',
@@ -174,7 +246,7 @@
       image: 'https://uxwing.com/wp-content/themes/uxwing/download/brands-and-social-media/github-copilot-icon.png',
       category: 'Coding Ai',
       tag: 'ai,chat,bot,github,coding, web, development', // data-tag
-      filter: 'Ai', // data-filter
+      filter: 'ai', // data-filter
       borderClass: 'border-primary',
       textClass: 'text-primary',
       modalId: '11',
@@ -207,7 +279,7 @@
       const galleryContainer = document.querySelector('.gallery');
       galleryContainer.innerHTML = ''; // Clear existing cards
 
-      predefinedCards.forEach(card => {
+       predefinedCards.forEach(card => {
         const cardHtml = `
           <div class="col-md-3 text-center card-item" data-filter="${card.filter}" data-tag="${card.tag}">
             <div class="thumbnail">
@@ -221,6 +293,7 @@
               </div>
             </div>
           </div>
+          
         `;
         galleryContainer.innerHTML += cardHtml;
       });
@@ -260,34 +333,7 @@
       }
     }
 
-    // Search filter functionality
-    $(document).on('input', '#search-box', function() {
-      var query = $(this).val().toLowerCase();
-
-      $('.gallery .col-md-3').each(function() {
-        var title = $(this).find('h3').text().toLowerCase();
-
-        if (title.includes(query)) {
-          $(this).fadeIn();
-        } else {
-          $(this).fadeOut();
-        }
-      });
-    });
-
-    // Filter functionality
-    $(document).on('click', '.filter-button', function() {
-      const filter = $(this).data('filter');
-
-      $('.gallery .col-md-3').each(function() {
-        const cardFilter = $(this).data('filter');
-        if (filter === 'all' || cardFilter === filter) {
-          $(this).fadeIn();
-        } else {
-          $(this).fadeOut();
-        }
-      });
-    });
+   
 
     // Initialize the page
     document.addEventListener('DOMContentLoaded', () => {
@@ -295,6 +341,27 @@
       setSectionFromURL();
       populateCards();
     });
+  </script>
+  
+  <script>
+  $(document).ready(function() {
+  var $navbar = $("#mNavbar");
+  
+  AdjustHeader(); // Incase the user loads the page from halfway down (or something);
+  $(window).scroll(function() {
+      AdjustHeader();
+  });
+  
+  function AdjustHeader(){
+    if ($(window).scrollTop() > 350) {
+      if (!$navbar.hasClass("navbar-fixed-top")) {
+        $navbar.addClass("navbar-fixed-top");
+      }
+    } else {
+      $navbar.removeClass("navbar-fixed-top");
+    }
+  }
+});
   </script>
 
 </body>
