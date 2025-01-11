@@ -8,6 +8,9 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
   
+  <link rel="stylesheet" 
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+  
   <!-- jQuery and Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
@@ -1209,6 +1212,14 @@ body {
     min-height: 275px;
     min-height: 275px;
     }
+    
+    .launch-button{
+    min-width: 100px;
+    }
+    
+.footer-buttons i{
+padding:10px;
+}
     </style>
     
     
@@ -1336,62 +1347,65 @@ body {
           </li>
           <li class="sidebar-dropdown">
             <a href="#">
-              <i class="fas fa-wrench"></i>
-              <span>Projects</span>
+              <i class="fas fa-users"></i>
+              <span>Team</span>
             </a>
             <div class="sidebar-submenu">
               <ul>
                 <li>
-                  <a href="#">Pie chart</a>
+                  <a href="#">Create a team</a>
                 </li>
                 <li>
-                  <a href="#">Line chart</a>
+                  <a href="#">Join a team</a>
                 </li>
                 <li>
-                  <a href="#">Bar chart</a>
+                  <a href="#">Collaborate</a>
                 </li>
                 <li>
-                  <a href="#">Histogram</a>
+                  <a href="#">Send invites</a>
                 </li>
               </ul>
             </div>
           </li>
           <li class="sidebar-dropdown">
             <a href="#">
-              <i class="fa fa-cog"></i>
-              <span>Settings</span>
+              <i class="fa fa-fire"></i>
+              <span>Discover</span>
             </a>
             <div class="sidebar-submenu">
               <ul>
                 <li>
-                  <a href="#">Google maps</a>
+                  <a href="#">Stacks by industry</a>
                 </li>
                 <li>
-                  <a href="#">Open street map</a>
+                  <a href="#">Apps at work</a>
+                </li>
+                <li>
+                  <a href="#">Use cases</a>
                 </li>
               </ul>
             </div>
           </li>
           <li class="header-menu">
-            <span>Extra</span>
+            <span>More</span>
           </li>
           <li>
             <a href="#">
-              <i class="fa fa-book"></i>
-              <span>Documentation</span>
+              <i class="fa fa-wrench"></i>
+              <span>Tools</span>
               <span class="badge badge-pill badge-primary">Beta</span>
             </a>
           </li>
           <li>
             <a href="#">
-              <i class="fa fa-calendar"></i>
-              <span>Calendar</span>
+              <i class="fa fa-cog"></i>
+              <span>Settings</span>
             </a>
           </li>
           <li>
             <a href="#">
-              <i class="fa fa-folder"></i>
-              <span>Examples</span>
+              <i class="fa fa-share-alt"></i>
+              <span>Share</span>
             </a>
           </li>
         </ul>
@@ -1752,9 +1766,8 @@ body {
                 <div class="container">
                     <div class="row">
                         <div class="col-12 col-md-3">
-                            <h3 class="mb-0"><i class="fas fa-dollar-sign"></i>Stackboard</h3>
-                            <small class="d-block text-muted">© 2024-2025</small>
-                            <small class="text-muted">All Rights Reserved.</small>
+                            <h3 class="mb-0"><i class="fas fa-th"></i> Stackboard</h3>
+           
                         </div>
                         <!--end of col-->
                         <div class="col-12 col-md-9">
@@ -1764,16 +1777,16 @@ body {
                                      <h5>Features</h5>
                                     <ul class="list-unstyled">
                                         <li>
-                                            <a href="#" class="text-muted">Ready to ship</a>
+                                            <a href="#" class="text-muted">App management</a>
                                         </li>
                                         <li>
-                                            <a href="#" class="text-muted">Light weight</a>
+                                            <a href="#" class="text-muted">Project management</a>
                                         </li>
                                         <li>
-                                            <a href="#" class="text-muted"> Responsive</a>
+                                            <a href="#" class="text-muted">Collaboration</a>
                                         </li>
                                         <li>
-                                            <a href="#" class="text-muted">Inner Pages</a>
+                                            <a href="#" class="text-muted">Smart goals</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -1782,16 +1795,16 @@ body {
                                     <h5>Resources</h5>
                                     <ul class="list-unstyled">
                                         <li>
-                                            <a href="#" class="text-muted">Angular</a>
+                                            <a href="#" class="text-muted">Media kit</a>
                                         </li>
                                         <li>
-                                            <a href="#" class="text-muted">Java</a>
+                                            <a href="#" class="text-muted">Documentation</a>
                                         </li>
                                         <li>
-                                            <a href="#" class="text-muted">Camunda API</a>
+                                            <a href="#" class="text-muted">Status & uptime</a>
                                         </li>
                                         <li>
-                                            <a href="#" class="text-muted">Postman</a>
+                                            <a href="#" class="text-muted">Pitch deck</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -1801,15 +1814,21 @@ body {
                                      <h5>Help</h5>
                                     <ul class="list-unstyled">
                                         <li>
-                                            <a href="#" class="text-muted">Forum</a>
+                                            <a href="#" class="text-muted">Knowledgebase</a>
                                         </li>
                                         <li>
                                             <a href="#" class="text-muted">FAQ</a>
                                         </li>
                                         <li>
-                                            <a href="#" class="text-muted">Projects</a>
+                                            <a href="#" class="text-muted">Change log</a>
                                         </li>
                                         <li>
+                                            <a href="#" class="text-muted">Report issue</a>
+                                        </li>
+                                          <li>
+                                            <a href="#" class="text-muted">Feature request</a>
+                                        </li>
+                                          <li>
                                             <a href="#" class="text-muted">Site map</a>
                                         </li>
                                     </ul>
@@ -1822,15 +1841,20 @@ body {
                                             <a href="#" class="text-muted">Team</a>
                                         </li>
                                         <li>
-                                            <a href="#" class="text-muted">Privact</a>
+                                            <a href="#" class="text-muted">Company</a>
                                         </li>
                                         <li>
-                                            <a href="#" class="text-muted">Terms</a>
+                                            <a href="#" class="text-muted">Blog</a>
                                         </li>
                                         <li>
-                                            <a href="#" class="text-muted">Investment</a>
+                                            <a href="#" class="text-muted">Contact</a>
                                         </li>
                                     </ul>
+                                    
+     
+     
+                                    
+                                    
                                 </div>
                                 <!--end of col-->
                             </div>
@@ -1838,8 +1862,23 @@ body {
                         </div>
                         <!--end of col-->
                     </div>
-                    <!--end of row-->
-                </div>
+                    <!--end of row--><hr>
+                     <div class="col-6 col-sm-12">
+                    <small class="d-block text-muted">Copyright © 2025 stackboard technologies, a dymond company. All Rights Reserved.</small>
+                            <small class="text-muted"><a href="#">Terms of Use</a> |
+<a href="#">Privacy & Cookie Policy</a> </small></div>
+                    
+                   
+                   <div class="footer-buttons text-right">
+                   
+                   
+                    <i class="fab fa-github fa-xl"></i>
+     <i class="fa-brands fa-discord fa-xl"></i>
+  <i class="fa-brands fa-x-twitter fa-xl"></i>
+  <i class="fa-brands fa-youtube fa-xl"></i>
+  <i class="fa-brands fa-reddit-alien fa-xl"></i>
+  </div></div>
+           
                 <!--end of container-->
             </footer>
   
