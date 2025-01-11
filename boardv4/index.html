@@ -2470,7 +2470,7 @@ function createButton({ url, name, size, openType }, modalId) {
   const dropdown = document.createElement('div');
   dropdown.className = 'dropdown';
   dropdown.innerHTML = `    
-    <button class="btn btn-outline-secondary dropdown-toggle" data-toggle="dropdown" style="margin-right: 10px;></button>
+    <button class="btn btn-outline-secondary dropdown-toggle" data-toggle="dropdown" style="margin-right: 10px;"></button>
     <div class="dropdown-menu">
       <a class="dropdown-item" href="#" onclick="editButton(this, ${modalId})">Edit</a>
       <a class="dropdown-item text-danger" href="#" onclick="removeButton(this, ${modalId})">Remove</a>
