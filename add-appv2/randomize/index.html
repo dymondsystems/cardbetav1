@@ -1,0 +1,442 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Page</title>
+  
+  
+    
+  
+  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+
+  
+  <style>
+ img { width: 100px; height: 100px; }
+    .thumbnail { height: 320px; }
+    .collapse { margin-top: 15px; }
+    .modal-iframe { width: 100%; height: 900px; border: none; }
+    .modal-dialog { max-width: 100%; height: 950px; margin: 0; }
+    .modal-content { height: 900px; }
+ 
+
+
+
+  </style> 
+</head>
+<body>
+
+ 
+
+  <div class="container">
+    <h2>Apps</h2>
+    
+    <div class="container">
+  <nav class="navbar " id="mNavbar">
+  <center>
+<a href="https://dymond.systems/cardbetav1/boardv4/" class="btn btn-success"style="left:0px; margin-top:0px; font-size: 20px;">Back to dashbord</a></center>
+  </nav></div>
+   
+    <hr>
+
+    <div class="pull-right">
+      <button class="btn btn-primary filter-button" data-filter="all">All</button>
+      <button class="btn btn-primary filter-button" data-filter="business">Business</button>
+      <button class="btn btn-primary filter-button" data-filter="ai">Ai</button>
+      <button class="btn btn-primary filter-button" data-filter="development">Development</button>
+        <button class="btn btn-primary" data-toggle="collapse" data-target="#moreFilters">More Filters</button>
+  </div>
+ 
+
+  <div id="moreFilters" class="collapse">
+    <button class="btn btn-secondary filter-button" data-filter="design">Design</button>
+    <button class="btn btn-secondary filter-button" data-filter="tools">Tools</button>
+  </div>
+ 
+    <br><br>
+
+    <h3>Choose a Section</h3>
+    <select id="sectionDropdown" class="form-control">
+      <!-- Dynamically populated sections -->
+    </select>
+
+    <br><br>
+
+    <!-- Search Box -->
+    <div class="form-group">
+      <input id="search-box" type="text" class="form-control" placeholder="Search Apps..." />
+    </div>
+
+    <br>
+   
+    
+    
+
+    <div class="gallery">
+      <!-- Cards will be populated here -->
+    </div>
+
+  </div>
+  
+  
+  
+  
+  
+  
+  
+  
+  <!-- The Modal chat -->
+  <div class="modal fade" id="iframeModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content" style= "background-color:#242424;">
+      
+        <!-- Modal Header -->
+        <div class="modal-header bg-dark">
+          <h4 class="modal-title">Help</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        
+        <!-- Modal body -->
+        <div class="modal-body ">
+        
+  <iframe id="iframeContent" class="modal-iframe"></iframe>
+
+        </div>
+        
+        <!-- Modal footer -->
+        <div class="modal-footer bg-dark">
+        
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <br>
+         </div> 
+          
+       
+        <div class="bg-dark">
+        <p>If you need more help try <a href="#">ChatGPT</a></p>
+      </div>
+    </div>
+  </div>
+  
+</div>
+
+  
+  <script>
+ let activeFilter = 'all';
+
+  // Filter buttons
+  $(document).on('click', '.filter-button', function () {
+    activeFilter = $(this).data('filter').toLowerCase();
+
+    $('.gallery .card-item').each(function () {
+      const filterTag = $(this).data('filter').toLowerCase();
+      if (filterTag === activeFilter || activeFilter === 'all') {
+        $(this).fadeIn();
+      } else {
+        $(this).fadeOut();
+      }
+    });
+
+    // Close collapsible div
+    if ($(this).closest('#moreFilters').length) {
+      $('#moreFilters').collapse('hide');
+    }
+  });
+
+  // Search functionality
+  $(document).on('input', '#search-box', function () {
+    const query = $(this).val().toLowerCase().split(/\s+/);
+
+    $('.gallery .card-item').each(function () {
+      const title = $(this).find('h3').text().toLowerCase();
+      const description = $(this).find('h4').text().toLowerCase();
+      const tags = $(this).data('tag').toLowerCase();
+      const content = `${title} ${description} ${tags}`;
+
+      const matches = query.every(term => content.includes(term));
+      matches ? $(this).fadeIn() : $(this).fadeOut();
+    });
+  });
+</script>
+  
+  
+  
+
+  <script>
+    // Sample predefined cards
+    const predefinedCards = [
+      
+       { id: '1',
+      title: 'PromptGPT',
+      description: 'Manage chatGPT prompts: by stackboard',
+      image: 'https://prompto.chat/assets/img/img.png?v=2',
+      category: 'Ai tool',
+      tag: 'chat, ai, gpt, bot', // data-tag
+      filter: 'ai', // data-filter
+      borderClass: 'border-primary',
+      textClass: 'text-primary',
+      modalId: '1',
+    },
+    
+    { id: '2',
+      title: 'Chat GPT',
+      description: 'Ai chat bot',
+      image: 'https://cdn.iconscout.com/icon/free/png-256/free-chatgpt-icon-download-in-svg-png-gif-file-formats--ai-technology-artificial-intelligence-pack-science-icons-7576880.png?f=webp&w=256',
+      category: 'Entertainment',
+      tag: 'chat, ai, gpt, bot', // data-tag
+      filter: 'ai', // data-filter
+      borderClass: 'border-primary',
+      textClass: 'text-primary',
+      modalId: '2',
+    },
+    
+    { id: '3',
+      title: 'Github',
+      description: 'Manage your code base',
+      image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQhcVrL5XiyI9tM5z8mYG9oSL76qEIV-JRH_A&s',
+      category: 'Code, development',
+      tag: 'github, code, development, html', // data-tag
+      filter: 'development', // data-filter
+      borderClass: 'border-primary',
+      textClass: 'text-primary',
+      modalId: '3',
+    },
+    { id: '4',
+      title: 'Stack editor',
+      description: 'Simple front end editor',
+      image: 'https://discourse-user-assets.s3.amazonaws.com/original/2X/d/df30640741461569071875cf4ff6cad9924f8b32.png',
+      category: 'development',
+      tag: 'code, editor, html,css, javascript,python', // data-tag
+      filter: 'development', // data-filter
+      borderClass: 'border-primary',
+      textClass: 'text-primary',
+      modalId: '4',
+    },
+    { id: '5',
+      title: 'google',
+      description: 'Search the web',
+      image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Google_%22G%22_logo.svg/800px-Google_%22G%22_logo.svg.png',
+      category: 'Entertainment',
+      tag: 'google, search', // data-tag
+      filter: 'business', // data-filter
+      borderClass: 'border-primary',
+      textClass: 'text-primary',
+      modalId: '5',
+    },
+    
+    { id: '6',
+      title: 'google docs',
+      description: 'Manage documents and more',
+      image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQpXYkEqKR1Iwm4ZIsDgW_GVQlODN4T_vkRFQ&s',
+      category: 'documents',
+      tag: 'docs, files, forms', // data-tag
+      filter: 'business', // data-filter
+      borderClass: 'border-primary',
+      textClass: 'text-primary',
+      modalId: '6',
+    },
+    { id: '7',
+      title: 'Gmail',
+      description: 'Email client',
+      image: 'https://standfirst-designweek-production.imgix.net/uploads/2020/10/07113122/gmail-1.jpg?fit=crop&crop=faces&q=80&auto=compress,format&w=364&h=243&dpr=2.625',
+      category: 'business',
+      tag: 'mail, gmail', // data-tag
+      filter: 'business', // data-filter
+      borderClass: 'border-primary',
+      textClass: 'text-primary',
+      modalId: '7',
+    },
+      { id: '8',
+      title: 'Font awesome',
+      description: 'Email client',
+      image: 'https://avatars.githubusercontent.com/u/1505683?v=4',
+      category: 'business',
+      tag: 'fonts, icons, design,development', // data-tag
+      filter: 'development', // data-filter
+      borderClass: 'border-primary',
+      textClass: 'text-primary',
+      modalId: '8',
+    },
+    
+      { id: '9',
+      title: 'tryit editor',
+      description: 'Simple front end editor',
+      image: 'https://d4.alternativeto.net/J2fiVl69ZFbPicxXE0lKoujQcbee8jxBUOKihh0BNws/rs:fit:280:280:0/g:ce:0:0/exar:1/YWJzOi8vZGlzdC9pY29ucy93M3NjaG9vbHNfMjMyMTk0LnBuZw.png',
+      category: 'development',
+      tag: 'html, code, editor', // data-tag
+      filter: 'development', // data-filter
+      borderClass: 'border-primary',
+      textClass: 'text-primary',
+      modalId: '9',
+    },
+      { id: '10',
+      title: 'Gemini',
+      description: 'Ai chat assistant by google',
+      image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcThr7qrIazsvZwJuw-uZCtLzIjaAyVW_ZrlEQ&s',
+      category: 'Ai chat',
+      tag: 'ai,chat,bot', // data-tag
+      filter: 'ai', // data-filter
+      borderClass: 'border-primary',
+      textClass: 'text-primary',
+      modalId: '10',
+    },
+        { id: '11',
+      title: 'Copilot',
+      description: 'Ai coding assistant by github',
+      image: 'https://uxwing.com/wp-content/themes/uxwing/download/brands-and-social-media/github-copilot-icon.png',
+      category: 'Coding Ai',
+      tag: 'ai,chat,bot,github,coding, web, development', // data-tag
+      filter: 'ai', // data-filter
+      borderClass: 'border-primary',
+      textClass: 'text-primary',
+      modalId: '11',
+    },
+
+       { id: '12',
+      title: 'firebase',
+      description: 'Cloud base web develoment',
+      image: 'https://www.gstatic.com/devrel-devsite/prod/v5ab6fd0ad9c02b131b4d387b5751ac2c3616478c6dd65b5e931f0805efa1009c/firebase/images/touchicon-180.png',
+      category: 'Web development',
+      tag: 'app, data, base,coding, web, development', // data-tag
+      filter: 'develoment', // data-filter
+      borderClass: 'border-primary',
+      textClass: 'text-primary',
+      modalId: '12',
+    },
+    
+    
+      // Add more predefined cards...
+    ];
+
+
+    // Function to populate the section dropdown from localStorage
+    function populateSectionDropdown() {
+      const sections = JSON.parse(localStorage.getItem('sections')) || [];
+      const dropdown = document.getElementById('sectionDropdown');
+      dropdown.innerHTML = ''; // Clear existing options
+
+      sections.forEach(section => {
+        const option = document.createElement('option');
+        option.value = section.id;
+        option.textContent = section.title;
+        dropdown.appendChild(option);
+      });
+
+      if (sections.length === 0) {
+        alert('Please create a stack first.');
+      }
+    }
+    
+    function shuffleArray(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]]; // Swap elements
+  }
+}
+
+    // Function to populate the cards in the gallery based on search and filters
+    function populateCards() {
+      const galleryContainer = document.querySelector('.gallery');
+      galleryContainer.innerHTML = ''; // Clear existing cards
+
+      // Shuffle the predefined cards before rendering
+  shuffleArray(predefinedCards);
+      
+       predefinedCards.forEach(card => {
+        const cardHtml = `
+          <div class="col-md-3 text-center card-item" data-filter="${card.filter}" data-tag="${card.tag}">
+            <div class="thumbnail">
+              <h3>${card.title}</h3>
+              <img class="img-fluid h-100" alt="${card.title}" src="${card.image}">
+              <div class="caption">
+                <h4>${card.description}</h4>
+                <button type="button" data-target="${card.id}" class="btn btn-primary addCardBtn">
+                  Add to Section
+                </button>
+                <button class="btn btn-primary open-modal-btn" data-modal="${card.modalId}">Open Modal</button>
+              </div>
+            </div>
+          </div>
+          
+        `;
+        galleryContainer.innerHTML += cardHtml;
+      });
+
+      // Add event listeners for the buttons to add cards to sections
+      document.querySelectorAll('.addCardBtn').forEach(button => {
+        button.addEventListener('click', () => {
+          const cardId = button.getAttribute('data-target');
+          const sectionId = document.getElementById('sectionDropdown').value;
+          
+          if (!sectionId) {
+            alert('Please select a section first.');
+            return;
+          }
+
+          const card = predefinedCards.find(c => c.id === cardId);
+          if (card) {
+            card.sectionId = sectionId;
+            const addedCards = JSON.parse(localStorage.getItem('addedCards')) || [];
+            addedCards.push(card);
+            localStorage.setItem('addedCards', JSON.stringify(addedCards));
+
+            alert(`Card "${card.title}" added to section!`);
+          }
+        });
+      });
+    }
+
+    // Function to get the section ID from the URL parameter and set it in the dropdown
+    function setSectionFromURL() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const sectionId = urlParams.get('sectionId');
+      const sectionDropdown = document.getElementById('sectionDropdown');
+      
+      if (sectionId) {
+        sectionDropdown.value = sectionId; // Set the dropdown to the section from URL
+      }
+    }
+// Open modal with iframe
+  $(document).on('click', '.open-modal-btn', function () {
+    const modalId = $(this).data('modal');
+    $('#iframeContent').attr('src', `https://example.com/modal-content/${modalId}`);
+    $('#iframeModal').modal('show');
+  });
+   
+
+    // Initialize the page
+    document.addEventListener('DOMContentLoaded', () => {
+      populateSectionDropdown();
+      setSectionFromURL();
+      populateCards();
+    });
+  </script>
+  
+  <script>
+  $(document).ready(function() {
+  var $navbar = $("#mNavbar");
+  
+  AdjustHeader(); // Incase the user loads the page from halfway down (or something);
+  $(window).scroll(function() {
+      AdjustHeader();
+  });
+  
+  function AdjustHeader(){
+    if ($(window).scrollTop() > 350) {
+      if (!$navbar.hasClass("navbar-fixed-top")) {
+        $navbar.addClass("navbar-fixed-top");
+      }
+    } else {
+      $navbar.removeClass("navbar-fixed-top");
+    }
+  }
+});
+  </script>
+
+</body>
+</html>
