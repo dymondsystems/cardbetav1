@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Page</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <style>
+    img { width: 100px; height: 100px; }
+    .thumbnail { height: 320px; }
+    .collapse { margin-top: 15px; }
+    .modal-iframe { width: 100%; height: 900px; border: none; }
+    .modal-dialog { max-width: 100%; height: 950px; margin: 0; }
+    .modal-content { height: 900px; }
+  </style> 
+</head>
+<body>
+  <div class="container">
+    <h2>Apps</h2>
+    <div class="container">
+      <nav class="navbar" id="mNavbar">
+        <center>
+          <a href="https://dymond.systems/cardbetav1/boardv4/" class="btn btn-success" style="left:0px; margin-top:0px; font-size: 20px;">Back to dashbord</a>
+        </center>
+      </nav>
+    </div>
+    <hr>
+    <div class="pull-right">
+      <button class="btn btn-primary filter-button" data-filter="all">All</button>
+      <button class="btn btn-primary filter-button" data-filter="business">Business</button>
+      <button class="btn btn-primary filter-button" data-filter="ai">Ai</button>
+      <button class="btn btn-primary filter-button" data-filter="development">Development</button>
+      <button class="btn btn-primary" data-toggle="collapse" data-target="#moreFilters">More Filters</button>
+    </div>
+    <div id="moreFilters" class="collapse">
+      <button class="btn btn-secondary filter-button" data-filter="design">Design</button>
+      <button class="btn btn-secondary filter-button" data-filter="tools">Tools</button>
+    </div>
+    <br><br>
+    <h3>Choose a Section</h3>
+    <select id="sectionDropdown" class="form-control">
+      <!-- Dynamically populated sections -->
+    </select>
+    <br><br>
+    <div class="form-group">
+      <input id="search-box" type="text" class="form-control" placeholder="Search Apps..." />
+    </div>
+    <br>
+    <button class="btn btn-success" data-toggle="modal" data-target="#createCardModal">Create Card</button>
+    <br><br>
+    <div class="gallery">
+      <!-- Cards will be populated here -->
+    </div>
+  </div>
+
+  <!-- The Modal for creating a new card -->
+  <div class="modal fade" id="createCardModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Create New Card</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <form id="createCardForm">
+            <div class="form-group">
+              <label for="cardTitle">Title</label>
+              <input type="text" class="form-control" id="cardTitle" required>
+            </div>
+            <div class="form-group">
+              <label for="cardDescription">Description</label>
+              <input type="text" class="form-control" id="cardDescription" required>
+            </div>
+            <div class="form-group">
+              <label for="cardImage">Image URL (optional)</label>
+              <input type="text" class="form-control" id="cardImage" placeholder="Leave blank to use default image">
+            </div>
+            <div class="form-group">
+              <label for="cardCategory">Category</label>
+              <input type="text" class="form-control" id="cardCategory" required>
+            </div>
+            <div class="form-group">
+              <label for="cardTag">Tag</label>
+              <input type="text" class="form-control" id="cardTag" required>
+            </div>
+            <div class="form-group">
+              <label for="cardFilter">Filter</label>
+              <input type="text" class="form-control" id="cardFilter" required>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" id="submitCard">Create Card</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let activeFilter = 'all';
+
+    // Filter buttons
+    $(document).on('click', '.filter-button', function () {
+      activeFilter = $(this).data('filter').toLowerCase();
+
+      $('.gallery .card-item').each(function () {
+        const filterTag = $(this).data('filter').toLowerCase();
+        if (filterTag === activeFilter || activeFilter === 'all') {
+          $(this).fadeIn();
+        } else {
+          $(this).fadeOut();
+        }
+      });
+
+      // Close collapsible div
+      if ($(this).closest('#moreFilters').length) {
+        $('#moreFilters').collapse('hide');
+      }
+    });
+
+    // Search functionality
+    $(document).on('input', '#search-box', function () {
+      const query = $(this).val().toLowerCase().split(/\s+/);
+
+      $('.gallery .card-item').each(function () {
+        const title = $(this).find('h3').text().toLowerCase();
+        const description = $(this).find('h4').text().toLowerCase();
+        const tags = $(this).data('tag').toLowerCase();
+        const content = `${title} ${description} ${tags}`;
+
+        const matches = query.every(term => content.includes(term));
+        matches ? $(this).fadeIn() : $(this).fadeOut();
+      });
+    });
+
+    // Sample predefined cards
+    const predefinedCards = [
+      // ... (your existing predefined cards)
+    ];
+
+    // Function to generate a unique ID
+    function generateUniqueId() {
+      return Date.now().toString(36) + Math.random().toString(36).substr(2, 9);
+    }
+
+    // Function to populate the section dropdown from localStorage
+    function populateSectionDropdown() {
+      const sections = JSON.parse(localStorage.getItem('sections')) || [];
+      const dropdown = document.getElementById('sectionDropdown');
+      dropdown.innerHTML = ''; // Clear existing options
+
+      sections.forEach(section => {
+        const option = document.createElement('option');
+        option.value = section.id;
+        option.textContent = section.title;
+        dropdown.appendChild(option);
+      });
+
+      if (sections.length === 0) {
+        alert('Please create a stack first.');
+      }
+    }
+
+    function shuffleArray(array) {
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]]; // Swap elements
+      }
+    }
+
+    // Function to populate the cards in the gallery based on search and filters
+    function populateCards() {
+      const galleryContainer = document.querySelector('.gallery');
+      galleryContainer.innerHTML = ''; // Clear existing cards
+
+      // Shuffle the predefined cards before rendering
+      shuffleArray(predefinedCards);
+
+      predefinedCards.forEach(card => {
+        const cardHtml = `
+          <div class="col-md-3 text-center card-item" data-filter="${card.filter}" data-tag="${card.tag}">
+            <div class="thumbnail">
+              <h3>${card.title}</h3>
+              <img class="img-fluid h-100" alt="${card.title}" src="${card.image}">
+              <div class="caption">
+                <h4>${card.description}</h4>
+                <button type="button" data-target="${card.id}" class="btn btn-primary addCardBtn">
+                  Add to Section
+                </button>
+                <button class="btn btn-primary open-modal-btn" data-modal="${card.modalId}">Open Modal</button>
+              </div>
+            </div>
+          </div>
+        `;
+        galleryContainer.innerHTML += cardHtml;
+      });
+
+      // Add event listeners for the buttons to add cards to sections
+      document.querySelectorAll('.addCardBtn').forEach(button => {
+        button.addEventListener('click', () => {
+          const cardId = button.getAttribute('data-target');
+          const sectionId = document.getElementById('sectionDropdown').value;
+
+          if (!sectionId) {
+            alert('Please select a section first.');
+            return;
+          }
+
+          const card = predefinedCards.find(c => c.id === cardId);
+          if (card) {
+            card.sectionId = sectionId;
+            const addedCards = JSON.parse(localStorage.getItem('addedCards')) || [];
+            addedCards.push(card);
+            localStorage.setItem('addedCards', JSON.stringify(addedCards));
+
+            alert(`Card "${card.title}" added to section!`);
+          }
+        });
+      });
+    }
+
+    // Function to get the section ID from the URL parameter and set it in the dropdown
+    function setSectionFromURL() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const sectionId = urlParams.get('sectionId');
+      const sectionDropdown = document.getElementById('sectionDropdown');
+
+      if (sectionId) {
+        sectionDropdown.value = sectionId; // Set the dropdown to the section from URL
+      }
+    }
+
+    // Open modal with iframe
+    $(document).on('click', '.open-modal-btn', function () {
+      const modalId = $(this).data('modal');
+      $('#iframeContent').attr('src', `https://example.com/modal-content/${modalId}`);
+      $('#iframeModal').modal('show');
+    });
+
+    // Handle form submission for creating a new card
+    document.getElementById('submitCard').addEventListener('click', function () {
+      const cardTitle = document.getElementById('cardTitle').value;
+      const cardDescription = document.getElementById('cardDescription').value;
+      const cardImage = document.getElementById('cardImage').value || 'https://cdn.iconscout.com/icon/free/png-256/free-chatgpt-icon-download-in-svg-png-gif-file-formats--ai-technology-artificial-intelligence-pack-science-icons-7576880.png?f=webp&w=256'; // Default image if empty
+      const cardCategory = document.getElementById('cardCategory').value;
+      const cardTag = document.getElementById('cardTag').value;
+      const cardFilter = document.getElementById('cardFilter').value;
+
+      // Generate unique IDs for the new card
+      const uniqueId = generateUniqueId();
+      const uniqueModalId = generateUniqueId();
+
+      const newCard = {
+        id: uniqueId, // Unique ID for the card
+        title: cardTitle,
+        description: cardDescription,
+        image: cardImage,
+        category: cardCategory,
+        tag: cardTag,
+        filter: cardFilter,
+        borderClass: 'border-primary',
+        textClass: 'text-primary',
+        modalId: uniqueModalId, // Unique modalId for the card
+      };
+
+      // Get the selected section ID
+      const sectionId = document.getElementById('sectionDropdown').value;
+
+      if (!sectionId) {
+        alert('Please select a section first.');
+        return;
+      }
+
+      // Associate the card with the selected section
+      newCard.sectionId = sectionId;
+
+      // Save the new card to localStorage under 'addedCards'
+      const addedCards = JSON.parse(localStorage.getItem('addedCards')) || [];
+      addedCards.push(newCard);
+      localStorage.setItem('addedCards', JSON.stringify(addedCards));
+
+      // Close the modal
+      $('#createCardModal').modal('hide');
+
+      // Notify the user that the card has been added
+      alert(`Card "${cardTitle}" has been added to the section!`);
+    });
+
+    // Initialize the page
+    document.addEventListener('DOMContentLoaded', () => {
+      populateSectionDropdown();
+      setSectionFromURL();
+      populateCards();
+    });
+  </script>
+
+  <script>
+    $(document).ready(function() {
+      var $navbar = $("#mNavbar");
+
+      AdjustHeader(); // Incase the user loads the page from halfway down (or something);
+      $(window).scroll(function() {
+        AdjustHeader();
+      });
+
+      function AdjustHeader(){
+        if ($(window).scrollTop() > 350) {
+          if (!$navbar.hasClass("navbar-fixed-top")) {
+            $navbar.addClass("navbar-fixed-top");
+          }
+        } else {
+          $navbar.removeClass("navbar-fixed-top");
+        }
+      }
+    });
+  </script>
+</body>
+</html>
