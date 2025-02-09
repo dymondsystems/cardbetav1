@@ -12,6 +12,38 @@
     img { width: 100px; height: 100px; }
     .thumbnail { height: 320px; }
     .collapse { margin-top: 15px; }
+    .filter-button {margin-bottom:5px;}
+    
+    
+    #iframeModal .modal-dialog {
+            width: 80%; /* Make modal full width */
+            height: 100%; /* Make modal full height */
+            
+        }
+
+       #iframeModal .modal-content {
+             height: 100%; /* Make content fill modal height */
+            border: 0; /* Remove default border */
+        }
+
+       #iframeModal .modal-body {
+           flex-grow: 1; /* Allow body to expand and fill available space */
+            padding: 0; /* Remove default padding from body */
+            overflow: hidden; /* Prevent iframe content from overflowing */ 
+          height:600px;
+        }
+
+       #iframeModal .modal-iframe {
+            width: 100%;
+            height:50%;
+            border: none; /* Remove iframe border */
+        }
+
+        
+    
+    
+    
+
   
   </style> 
 </head>
@@ -21,7 +53,7 @@
     <div class="container">
       <nav class="navbar" id="mNavbar">
         <center>
-          <a href="https://dymond.systems/cardbetav1/boardv4/" class="btn btn-success" style="left:0px; margin-top:0px; font-size: 20px;">Back to dashbord</a>
+          <a href="https://dymond.systems/cardbetav1/boardv4/" class="btn btn-default" style="left:0px; margin-top:20px; font-size: 20px;">Back to dashbord</a>
         </center>
       </nav>
     </div>
@@ -31,23 +63,55 @@
       <button class="btn btn-primary filter-button" data-filter="business">Business</button>
       <button class="btn btn-primary filter-button" data-filter="ai">Ai</button>
       <button class="btn btn-primary filter-button" data-filter="development">Development</button>
-      <button class="btn btn-primary" data-toggle="collapse" data-target="#moreFilters">More Filters</button>
+      <button class="btn btn-primary filter-button" data-toggle="collapse" data-target="#moreFilters">More Filters</button>
     </div>
+    <br>
+    <br>
     <div id="moreFilters" class="collapse">
+      <button class="btn btn-secondary filter-button" data-filter="design">Design</button>
+      <button class="btn btn-secondary filter-button" data-filter="tools">Tools</button>
+      <button class="btn btn-secondary filter-button" data-filter="design">Design</button>
+      <button class="btn btn-secondary filter-button" data-filter="tools">Tools</button>
+      <button class="btn btn-secondary filter-button" data-filter="design">Design</button>
+      <button class="btn btn-secondary filter-button" data-filter="tools">Tools</button>
+      <button class="btn btn-secondary filter-button" data-filter="design">Design</button>
+      <button class="btn btn-secondary filter-button" data-filter="tools">Tools</button>
+         <button class="btn btn-secondary filter-button" data-filter="design">Design</button>
+      <button class="btn btn-secondary filter-button" data-filter="tools">Tools</button>
+      <button class="btn btn-secondary filter-button" data-filter="design">Design</button>
+      <button class="btn btn-secondary filter-button" data-filter="tools">Tools</button>
+      <button class="btn btn-secondary filter-button" data-filter="design">Design</button>
+      <button class="btn btn-secondary filter-button" data-filter="tools">Tools</button>
+      <button class="btn btn-secondary filter-button" data-filter="design">Design</button>
+      <button class="btn btn-secondary filter-button" data-filter="tools">Tools</button>
+      <button class="btn btn-secondary filter-button" data-filter="design">Design</button>
+      <button class="btn btn-secondary filter-button" data-filter="tools">Tools</button>
+      <button class="btn btn-secondary filter-button" data-filter="design">Design</button>
+      <button class="btn btn-secondary filter-button" data-filter="tools">Tools</button>
+      <button class="btn btn-secondary filter-button" data-filter="design">Design</button>
+      <button class="btn btn-secondary filter-button" data-filter="tools">Tools</button>
+      <button class="btn btn-secondary filter-button" data-filter="design">Design</button>
+      <button class="btn btn-secondary filter-button" data-filter="tools">Tools</button>
+         <button class="btn btn-secondary filter-button" data-filter="design">Design</button>
+      <button class="btn btn-secondary filter-button" data-filter="tools">Tools</button>
+      <button class="btn btn-secondary filter-button" data-filter="design">Design</button>
+      <button class="btn btn-secondary filter-button" data-filter="tools">Tools</button>
+      <button class="btn btn-secondary filter-button" data-filter="design">Design</button>
+      <button class="btn btn-secondary filter-button" data-filter="tools">Tools</button>
       <button class="btn btn-secondary filter-button" data-filter="design">Design</button>
       <button class="btn btn-secondary filter-button" data-filter="tools">Tools</button>
     </div>
     <br><br>
-    <h3>Choose a Section</h3>
-    <select id="sectionDropdown" class="form-control">
+    <h3>Choose a stack</h3>
+    <select id="sectionDropdown" class="form-control" style="width:300px;">
       <!-- Dynamically populated sections -->
     </select>
     <br><br>
     <div class="form-group">
-      <input id="search-box" type="text" class="form-control" placeholder="Search Apps..." />
+      <input id="search-box" type="text" class="form-control" style="height: 60px; font-size: 25px; font-weight: bold;" placeholder="Search Apps..." />
     </div>
     <br>
-    <button class="btn btn-success" data-toggle="modal" data-target="#createCardModal">Create Card</button>
+    <button class="btn btn-success" data-toggle="modal" data-target="#createCardModal" style="width: 200px; height: 50px; font-size: 20px;">Custom Card</button>
     <br><br>
     <div class="gallery">
       <!-- Cards will be populated here -->
@@ -92,7 +156,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary" id="submitCard">Create Card</button>
+          <button type="button" class="btn btn-primary" id="submitCard">Add to stack</button>
         </div>
       </div>
     </div>
@@ -104,42 +168,25 @@
   
   
   
-  
-  
-  <!-- The Modal chat -->
   <div class="modal fade" id="iframeModal" tabindex="-1" role="dialog">
-    <div class="modal-dialog modal-xl">
-      <div class="modal-content" style= "background-color:#242424;">
-      
-        <!-- Modal Header -->
-        <div class="modal-header bg-dark">
-          <h4 class="modal-title">Help</h4>
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-        </div>
-        
-        <!-- Modal body -->
-        <div class="modal-body ">
-        
-  <iframe id="iframeContent" class="modal-iframe"></iframe>
+    <div class="modal-dialog modal-xl">  <div class="modal-content">
 
-        </div>
-        
-        <!-- Modal footer -->
-        <div class="modal-footer bg-dark">
-        
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <br>
-         </div> 
-          
-       
-        <div class="bg-dark">
-        <p>If you need more help try <a href="#">ChatGPT</a></p>
-      </div>
-    </div>
-  </div> 
-    
-    
-  </div>
+            <div class="modal-header bg-dark">
+                <h4 class="modal-title">Help</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <div class="modal-body">
+                <iframe id="iframeContent" class="modal-iframe"></iframe>
+            </div>
+
+            <div class="modal-footer bg-dark">  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+
+        </div>  </div>  </div> 
+ 
+ 
+ 
 
   <script>
     let activeFilter = 'all';
@@ -242,7 +289,7 @@
     
     { id: '6',
       title: 'google docs',
-      description: 'Manage documents and more',
+      description: 'Manage documents',
       image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQpXYkEqKR1Iwm4ZIsDgW_GVQlODN4T_vkRFQ&s',
       category: 'documents',
       tag: 'docs, files, forms', // data-tag
@@ -498,8 +545,8 @@
                 <h4>${card.description}</h4>
                 <button class="btn btn-link open-modal-btn" data-modal="${card.modalId}"><i class="fas fa-info-circle "></i> info</button>
                 <br>
-                <button type="button" data-target="${card.id}" class="btn btn-primary addCardBtn">
-                  Add to Section
+               <button type="button" data-target="${card.id}" class="btn btn-primary addCardBtn">
+                  Add to Stack
                 </button>
                 
               </div>
@@ -609,7 +656,7 @@
       $('#createCardModal').modal('hide');
 
       // Notify the user that the card has been added
-      alert(`Card "${cardTitle}" has been added to the section!`);
+      alert(`"${cardTitle}" has been added to your stack!`);
     });
 
     // Initialize the page
