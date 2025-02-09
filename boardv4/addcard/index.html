@@ -250,6 +250,7 @@
       filter: 'ai', // data-filter
       borderClass: 'border-primary',
       textClass: 'text-primary',
+     infoUrl: 'chatgpt',
       modalId: '2',
     },
     
@@ -543,7 +544,7 @@
               <img class="img-fluid h-100" alt="${card.title}" src="${card.image}">
               <div class="caption">
                 <h4>${card.description}</h4>
-                <button class="btn btn-link open-modal-btn" data-modal="${card.modalId}"><i class="fas fa-info-circle "></i> info</button>
+                <button class="btn btn-link open-modal-btn" data-modal="${card.infoUrl}"><i class="fas fa-info-circle "></i> info</button>
                 <br>
                <button type="button" data-target="${card.id}" class="btn btn-primary addCardBtn">
                   Add to Stack
@@ -605,8 +606,8 @@
 
     // Open modal with iframe
     $(document).on('click', '.open-modal-btn', function () {
-      const modalId = $(this).data('modal');
-      $('#iframeContent').attr('src', `https://example.com/modal-content/${modalId}`);
+      const infoUrl = $(this).data('modal');
+      $('#iframeContent').attr('src', `/apps/${infoUrl}`);
       $('#iframeModal').modal('show');
     });
 
