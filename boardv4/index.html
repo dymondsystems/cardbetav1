@@ -1220,6 +1220,142 @@ body {
 .footer-buttons i{
 padding:10px;
 }
+      
+      
+           
+      
+      
+      
+      
+      
+        #popUpSidebar {
+      position: fixed;
+      width: 200px; /* Sidebar width */
+      background-color: #424949;
+      color: white;
+      z-index: 9999;
+      transition: all 0.2s ease; /* Smooth transition for sidebar movement */
+      opacity: 0; /* Initially invisible */
+      visibility: hidden; /* Sidebar hidden initially */
+      pointer-events: none; /* Disable interactions when hidden */
+      padding:20px;
+    }
+
+    #popUpSidebar.show {
+      opacity: 1; /* Fully visible */
+      visibility: visible; /* Make visible */
+      pointer-events: auto; /* Enable interactions */
+    }
+    #popUpSidebar button {
+      display: block;
+      width: 100%;
+      
+      border: none;
+      padding: 10px;
+      margin: 5px 0;
+      cursor: pointer;
+      position: relative;
+    }
+    
+
+    #popUpSidebar button:hover {
+      background-color: #003f7f;
+    }
+
+    #popUpSidebar button .remove-btn {
+      display: none;
+      position: absolute;
+      top: 40%;
+      right: 15px;
+      transform: translate(50%,-50%);
+      
+      color: white;
+      border: none;
+      border-radius: 0%;
+      width: 5px;
+      height: 0px;
+      cursor: pointer;
+      text-align: center;
+      line-height: 0px;
+      
+      
+      font-size: 12px;
+    }
+
+    #popUpSidebar button:hover .remove-btn {
+      display: block;
+    }
+
+    .content input {
+      margin-bottom: 10px;
+    }
+    add{
+    font-size: 20px;
+    font-weight: bold;
+    float: left;
+  
+    }
+      
+      /* Add these styles to your CSS */
+.btn-warning {
+  background-color: #ffc107;
+  border-color: #ffc107;
+  color: #000;
+}
+
+.sticky-btn.untrackable {
+  position: relative;
+}
+
+.untrackable-indicator {
+  position: absolute;
+  top: 5px;
+  right: 25px;
+  background: #ffc107;
+  color: #000;
+  border-radius: 50%;
+  width: 16px;
+  height: 16px;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: help;
+}
+      
+      
+      /* Previous styles remain the same, add/update these styles */
+
+/* Fullscreen Toggle Container */
+.fullscreen-toggle-container {
+  position: fixed;
+  bottom: 10px;
+  width: 200px;
+  padding: 15px;
+  
+  
+  z-index: 1001;
+}
+
+/* Custom Switch Styles */
+.custom-switch {
+  padding-left: 2.25rem;
+}
+
+.custom-control-input:checked ~ .custom-control-label::before {
+  background-color: #17a2b8;
+  border-color: #17a2b8;
+}
+
+.custom-control-input:focus ~ .custom-control-label::before {
+  box-shadow: 0 0 0 0.2rem rgba(23, 162, 184, 0.25);
+}
+
+/* Update window-buttons padding to account for fixed toggle */
+.window-buttons {
+  padding: 0 10px;
+  margin-bottom: 70px; /* Increased to make room for toggle switch */
+}
     </style>
     
     
@@ -1237,7 +1373,7 @@ padding:10px;
     <div class="sidebar-content">
       <div class="sidebar-brand">
        <i class="fa fa-th"></i> 
-        <a href="#" style= "color: white; text-transform: lowercase;">stack board</a>
+        <a href="/cardbetav1/boardv4" style= "color: white; text-transform: lowercase;">stack board</a>
         
         <div id="close-sidebar">
           <i class="fa fa-times"></i>
@@ -1255,7 +1391,7 @@ padding:10px;
             <strong>User</strong>
           </span>
           <span class="user-status">
-        <i class="fa fa-circle"></i>  Administrator</span>
+        <i class="fa fa-circle"></i>  online</span>
           <span class="user-statu">
             <i class="fa fa-edit"></i>
             <span>Edit</span>
@@ -1292,22 +1428,9 @@ padding:10px;
             </a>
             <div class="sidebar-submenu">
               <ul>
+                
                 <li>
-                      <a href="/sb-projectmanager">Project 1
-
-                  </a>
-                </li>
-                <li>
-                  <a href="/sb-projectmanger">Project 2</a>
-                </li>
-                <li>
-                  <a href="/cardbetav1/projects" class="text-success">+ New board</a>
-                </li>
-                <li>
-                  <p style="color: gray; font-weight: bold;">Team boards</p>
-                </li>
-                <li>
-                  <a href="/cardbetav1/projects" class="text-success">+ New Team board</a>
+                  <a href="#" data-toggle="modal" data-target="#board">+ New board</a>
                 </li>
               </ul>
             </div>
@@ -1315,25 +1438,15 @@ padding:10px;
           <li class="sidebar-dropdown">
             <a href="#">
               <i class="fas fa-tasks"></i>
-              <span>Tasks</span>
+              <span>Projects</span>
             </a>
             <div class="sidebar-submenu">
               <ul>
                 <li>
-                  <a href="/sb-projectmanager">Updates and changes</a>
+                  <a href="/cardbetav1/projects2">+ New project</a>
                 </li>
-                <li>
-                  <a href="#">Panels</a>
-                </li>
-                <li>
-                  <a href="#">Tables</a>
-                </li>
-                <li>
-                  <a href="#">Icons</a>
-                </li>
-                <li>
-                  <a href="#">Forms</a>
-                </li>
+               
+                
               </ul>
             </div>
           </li>
@@ -1345,38 +1458,24 @@ padding:10px;
             <div class="sidebar-submenu">
               <ul>
                 <li>
-                  <a href="#">Create a team</a>
+                  <a href="#" data-toggle="modal" data-target="#team">Create a team</a>
                 </li>
                 <li>
-                  <a href="#">Join a team</a>
+                  <a href="#" data-toggle="modal" data-target="#team">Join a team</a>
                 </li>
+                
                 <li>
-                  <a href="#">Collaborate</a>
-                </li>
-                <li>
-                  <a href="#">Send invites</a>
+                  <a href="#" data-toggle="modal" data-target="#team">Send invites</a>
                 </li>
               </ul>
             </div>
           </li>
-          <li class="sidebar-dropdown">
-            <a href="#">
+         <li>
+            <a href="/cardbetav1/boardv4/addcard">
               <i class="fa fa-fire"></i>
               <span>Discover</span>
             </a>
-            <div class="sidebar-submenu">
-              <ul>
-                <li>
-                  <a href="/cardbetav1/notrackv1">Sidebar</a>
-                </li>
-                <li>
-                  <a href="/cardbetav1/shortcuts">Shortcuts</a>
-                </li>
-                <li>
-                  <a href="#">Use cases</a>
-                </li>
-              </ul>
-            </div>
+           
           </li>
           <li class="header-menu">
             <span>More</span>
@@ -1389,7 +1488,7 @@ padding:10px;
             </a>
           </li>
           <li>
-            <a href="#">
+            <a href="#" data-toggle="modal" data-target="#settings" data-toggle="tooltip" data-placement="top" title="Ctrl+Shift+S">
               <i class="fa fa-cog"></i>
               <span>Settings</span>
             </a>
@@ -1558,12 +1657,12 @@ padding:10px;
  
   
   <div id="noCardsPlaceholder" class="alert  text-center" style="display: none;">
-  Search your stacks
+  Search stacks
 
 
    
   <!-- Filter Input -->
-<input id="filterInput" type="text" class="form-control" placeholder="Search stacks...">
+<input id="filterInput" type="text" class="form-control" placeholder="Type / to search... ">
 </div>
 <!-- No Results Message -->
 <div id="noResultsMessage" class="alert alert-warning d-none">No results found.</div>
@@ -1590,6 +1689,132 @@ padding:10px;
 <div id="sectionsContainer">
       <!-- Dynamic sections and cards will load here -->
     </div>
+      
+          
+             <div id="popUpSidebar" class="sidebar">
+   
+          
+         
+  <div id="sidebarButtonsContainer"></div>
+          <div class="side" style="position: fixed; right:30px;
+                                   bottom: 40px;">
+            <center><a href="#" data-toggle="modal" data-target="#help"><i class="fas fa-question-circle fa-lg"></i></a></center>
+            <br>
+            <p>Go back: <strong>ALT + </strong><i class="fas fa-arrow-left"></i></p>
+            
+          </div>
+</div>
+          
+      <!-- Shortcut Builder Modal -->
+<div id="shortcutModal" class="modal fade" tabindex="-1" style="z-index: 9999;">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Set Keyboard Shortcut</h5>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p>Select modifier keys and press any key to set the shortcut.</p>
+        <div class="modifier-keys mb-3">
+          <button class="btn btn-outline-secondary" data-key="Ctrl">Ctrl</button>
+          <button class="btn btn-outline-secondary" data-key="Alt">Alt</button>
+          <button class="btn btn-outline-secondary" data-key="Shift">Shift</button>
+          <button class="btn btn-outline-secondary" data-key="Meta">Meta (Cmd)</button>
+        </div>
+        <div class="shortcut-preview mb-3">
+          <strong>Current Shortcut:</strong> <span id="currentShortcutDisplay"></span>
+          <button class="btn btn-sm btn-outline-primary ml-2" id="editShortcut">Edit</button>
+        </div>
+        <div class="shortcut-preview mb-3">
+          <strong>New Shortcut:</strong> <span id="shortcutDisplay"></span>
+        </div>
+        <div class="alert alert-danger" id="shortcutConflictAlert" style="display: none;">
+          This shortcut is already in use by the button: <strong id="conflictingButtonName"></strong>.
+          <div class="mt-2">
+            <button type="button" class="btn btn-danger btn-sm" id="confirmOverride">Yes, Override</button>
+            <button type="button" class="btn btn-secondary btn-sm" id="cancelOverride">Cancel</button>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-primary" id="saveShortcut">Save</button>
+      </div>
+    </div>
+  </div>
+</div>      
+          
+          
+          
+          
+          
+          
+          
+          
+  <!-- settings modal -->
+
+<div class="modal fade" id="settings" tabindex="-1" role="dialog" aria-labelledby="settingsLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="settingsLabel">Settings</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p style="margin-bottom: 50px; margin-left: 130px;">Access settings (Ctrl+Shift+S)</p>
+        
+        
+        <div class="custom-control custom-switch">
+  <input type="checkbox" class="custom-control-input" id="settingsFullscreenToggle">
+  <label class="custom-control-label" for="settingsFullscreenToggle">
+    <strong>Enable sidebar Fullscreen Mode</strong>
+    <br>(All windows opened from the sidebar will open in fullscreen)
+  </label>
+</div>
+
+ <div class="custom-control custom-switch">
+  <input type="checkbox" class="custom-control-input" id="windowBehaviorToggle">
+  <label class="custom-control-label" for="windowBehaviorToggle">
+    <strong>Refocus Existing Windows</strong>
+    <br>(Existing trackable windows will be brought to front instead of opening new windows)
+  </label>
+</div>
+        
+    <div class="custom-control custom-switch">
+  <input type="checkbox" class="custom-control-input" id="shortcutBehaviorToggle">
+  <label class="custom-control-label" for="shortcutBehaviorToggle">
+    <strong>Refocus Existing Windows for Shortcuts</strong>
+    <br>(When using shortcuts, existing trackable windows will be brought back up instead of opening new windows)
+  </label>
+</div>   
+        
+        <div class="custom-control custom-switch">
+  <input type="checkbox" class="custom-control-input" id="autoCloseWindowsToggle">
+  <label class="custom-control-label" for="autoCloseWindowsToggle">
+    <strong>Auto-close windows when modal is closed</strong>
+    <br>(Close all attached windows opened from a card whenever the card is closed)
+    <br>
+  </label>
+</div>
+
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" >Save changes</button>
+      </div>
+    </div>
+  </div>
+          </div>    
+          
+          
+          
+          
+          
+          
+          
     <!-- Account Info Modal -->
   <div class="modal fade" id="addsection" tabindex="-1" role="dialog" aria-labelledby="accountinfoLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -1617,7 +1842,72 @@ padding:10px;
     
     
     
-    
+    <!-- help modal -->
+
+<div class="modal fade" id="help" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="myModalLabel">Help</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Buttons in yellow cannot be tracked
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        
+      </div>
+    </div>
+  </div>
+</div>
+          
+          <!-- projects modal -->
+
+<div class="modal fade" id="team" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="myModalLabel">Team</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Team features are not active in this demo
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        
+      </div>
+    </div>
+  </div>
+</div>
+          
+          
+ <!-- new boards -->
+
+<div class="modal fade" id="board" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="myModalLabel">Create new board</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Multiple boards are not supported in this demo
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        
+      </div>
+    </div>
+  </div>
+</div>         
     
     
     
@@ -1999,18 +2289,6 @@ function loadSections() {
 
  
  
- 
- 
- 
- 
- 
- 
- 
- 
-
-
-
-
 
     // Make cards sortable within each section
     new Sortable(document.getElementById(`cards-${section.id}`), {
@@ -2070,11 +2348,12 @@ function showAlert(message, type) {
   }, 3000);
 }
 
-
+</script>
+  
     
     
    
-    
+ <script>   
     
    
 function loadCards() {
@@ -2125,9 +2404,9 @@ function loadCards() {
             <div class="dropdown">
               <i class="fa fa-ellipsis-v" aria-hidden="true" data-toggle="dropdown" style="float: right;"></i>
               <div class="dropdown-menu">
-                <a class="dropdown-item" data-toggle="modal" href="#accountinfo" onclick="showAccountInfo('${card.id}')">Add account info</a>
-                <a class="dropdown-item" href="#">Edit category</a>
-                <a class="dropdown-item text-danger" href="#" onclick="removeCard('${card.id}')">Remove</a>
+                <a class="dropdown-item" data-toggle="modal" href="#accountinfo" onclick="showAccountInfo('${card.id}')"><i class="fas fa-wrench-alt"></i> Manage account</a>
+                
+                <a class="dropdown-item text-danger" href="#" onclick="removeCard('${card.id}')"><i class="fas fa-trash-alt"></i> Remove</a>
               </div>
             </div>
             <center><img src="${card.image}" alt="${card.title}" class="img-fluid" style="width: 80px; height: 80px;">
@@ -2190,6 +2469,7 @@ function showAccountInfo(cardId) {
   if (card) {
     document.querySelector('#accountinfo .modal-title').innerText = card.title;
     document.querySelector('#accountinfo .modal-body').innerHTML = `
+    <h5>Due to security reasons, account management is not available in the demo version</h5>
       <p><strong>Category:</strong> ${card.category}</p>
       <p><strong>Description:</strong> ${card.description}</p>
     `;
@@ -2279,13 +2559,14 @@ function createButton({ url, name, size, openType }) {
       openWindow(url, size); // Call openWindow when clicking the button
     }
   };
-
-  const dropdown = document.createElement('div');
+const dropdown = document.createElement('div');
   dropdown.className = 'dropdown';
   dropdown.innerHTML = `    
     <button class="btn btn-outline-secondary dropdown-toggle" data-toggle="dropdown"></button>
     <div class="dropdown-menu">
+    <a class="dropdown-item" href="#" onclick="stickToTopButton(this, 'window')"> Stick to Top</a>
       <a class="dropdown-item" href="#" onclick="editButton(this)">Edit</a>
+      <a class="dropdown-item" href="#" onclick="setShortcut(this)">Set Keyboard Shortcut</a>
       <a class="dropdown-item text-danger" href="#" onclick="removeButton(this)">Remove</a>
     </div>`;
 
@@ -2293,6 +2574,7 @@ function createButton({ url, name, size, openType }) {
   buttonDiv.appendChild(dropdown);
   launchButtonsContainer.appendChild(buttonDiv);
 }
+  
 
 // Open a new window based on the selected size
 function openWindow(url, size) {
@@ -2322,9 +2604,24 @@ function openWindow(url, size) {
 
   left = (screen.width - width) / 2;
   top = (screen.height - height) / 2;
+  
+  
+ 
 
-  openedWindow = window.open(url, '_blank', `width=${width},height=${height},top=${top},left=${left}`);
+  const newWin = window.open(url, '_blank', `width=${width},height=${height},top=${top},left=${left}`);
+  
+  
+   if (newWin) {
+    openedWindows.set(url, newWin); // Store reference
+    newWin.onbeforeunload = () => openedWindows.delete(url); // Remove when closed
+  }
+
+  return newWin;
 }
+  
+
+ 
+ 
 
 // Add or edit button
 newButtonForm.onsubmit = (e) => {
@@ -2382,25 +2679,70 @@ cancelButton.onclick = () => {
   $('#addEditButton').collapse('hide');
 };
 
+
 // Open modal
 $('#myModal').on('show.bs.modal', function (e) {
   currentModal = $(e.relatedTarget).data('modal'); // Get modal ID
   loadButtons(currentModal);
 });
-
-// Close window and modal when modal is hidden
 $('#myModal').on('hidden.bs.modal', function () {
   editingButton = null;
   saveButton.textContent = 'Add';
   $('#addEditButton').collapse('hide');
-  
-  // Close the opened window when the modal is hidden
-  if (openedWindow && !openedWindow.closed) {
-    openedWindow.close();
+
+  // Check if auto-close is enabled
+  const autoCloseEnabled = JSON.parse(localStorage.getItem("autoCloseWindows")) || false;
+
+  if (autoCloseEnabled) {
+    // Loop through all stored windows and close them
+    openedWindows.forEach((win, url) => {
+      if (win && !win.closed) {
+        win.close();
+      }
+    });
+
+    // Clear the map after closing all windows
+    openedWindows.clear();
   }
 });
-</script>
 
+
+
+</script>
+      
+ <script>
+   document.addEventListener("DOMContentLoaded", () => {
+  const autoCloseToggle = document.getElementById("autoCloseWindowsToggle");
+
+  // Load saved state
+  const autoCloseEnabled = JSON.parse(localStorage.getItem("autoCloseWindows")) || false;
+  autoCloseToggle.checked = autoCloseEnabled;
+
+  // Save state when toggled
+  autoCloseToggle.addEventListener("change", () => {
+    localStorage.setItem("autoCloseWindows", autoCloseToggle.checked);
+  });
+});
+
+      </script>
+      
+      
+      
+      
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+  const refocusToggle = document.getElementById('windowBehaviorToggle');
+
+  if (refocusToggle) {
+    refocusToggle.checked = JSON.parse(localStorage.getItem('refocusExistingWindows')) || false;
+
+    refocusToggle.addEventListener('change', (event) => {
+      localStorage.setItem('refocusExistingWindows', event.target.checked);
+    });
+  }
+});
+
+      </script>
 
 <script>
 // Function to load buttons for a specific modal
@@ -2498,26 +2840,117 @@ function createButton({ url, name, size, openType }, modalId) {
   button.innerHTML = `<i class='fa fa-external-link-alt'></i><br>${name}`;
 
   button.onclick = () => {
-    if (openType === 'newTab') {
-      window.open(url, '_blank');
-    } else {
-      openWindow(url, size);
+  const refocusEnabled = JSON.parse(localStorage.getItem('refocusExistingWindows')) || false;
+
+  if (refocusEnabled && openedWindows.has(url)) {
+    const existingWindow = openedWindows.get(url);
+    if (existingWindow && !existingWindow.closed) {
+      existingWindow.focus();
+      return; // Stop here, no need to open a new window
     }
-  };
+  }
+
+  if (openType === 'newTab') {
+    window.open(url, '_blank');
+  } else {
+    const newWindow = openWindow(url, size);
+    openedWindows.set(url, newWindow); // Track the opened window
+  }
+};
+  
+  
+  
+
 
   const dropdown = document.createElement('div');
   dropdown.className = 'dropdown';
   dropdown.innerHTML = `    
-    <button class="btn btn-outline-secondary dropdown-toggle" data-toggle="dropdown" style="margin-right: 10px;"></button>
+    <button class="btn btn-outline-secondary dropdown-toggle" data-toggle="dropdown"></button>
     <div class="dropdown-menu">
-      <a class="dropdown-item" href="#" onclick="editButton(this, ${modalId})">Edit</a>
-      <a class="dropdown-item text-danger" href="#" onclick="removeButton(this, ${modalId})">Remove</a>
+    <a class="dropdown-item" href="#" onclick="stickToTopButton(this, 'window')"><i class="far fa-sticky-note"></i> Stick to Top</a>
+      <a class="dropdown-item" href="#" onclick="editButton(this, ${modalId})"><i class="fas fa-edit"></i> Edit</a>
+       <a class="dropdown-item" href="#" onclick="setShortcut(this)"><i class="fas fa-keyboard"></i> Set Shortcut</a>
+      <a class="dropdown-item text-danger" href="#" onclick="removeButton(this, ${modalId})"><i class="fas fa-trash-alt"></i> Remove</a>
     </div>`;
 
+  
   buttonDiv.appendChild(button);
   buttonDiv.appendChild(dropdown);
   launchButtonsContainer.appendChild(buttonDiv);
 }
+  
+  
+ // Function to set a keyboard shortcut
+function setShortcut(element) {
+  const buttonDiv = element.closest('.btn-group');
+  const button = buttonDiv.querySelector('.launch-button');
+
+  // Prompt the user to enter a shortcut key
+  const shortcut = prompt('Enter a keyboard shortcut (e.g., "Ctrl+Shift+K"):');
+  if (shortcut) {
+    button.dataset.shortcut = shortcut;
+    alert(`Shortcut "${shortcut}" set for "${button.dataset.name}"`);
+  }
+}
+ const openedWindows = new Map();
+
+document.addEventListener("keydown", (event) => {
+  const shortcuts = JSON.parse(localStorage.getItem("shortcuts")) || {};
+  const refocusEnabled = JSON.parse(localStorage.getItem("refocusShortcutWindows")) || false;
+
+  for (const shortcut in shortcuts) {
+    if (checkShortcut(event, shortcut)) {
+      event.preventDefault();
+      const { url, openType } = shortcuts[shortcut];
+
+      // Retrieve latest size setting from the button dataset
+      const button = document.querySelector(`.launch-button[data-url="${url}"]`);
+      const size = button ? button.dataset.size : "medium"; // Default to medium if not found
+
+      if (refocusEnabled && openedWindows.has(url)) {
+        const existingWindow = openedWindows.get(url);
+        if (existingWindow && !existingWindow.closed) {
+          existingWindow.focus();
+          return; // Stop execution if refocus was successful
+        }
+      }
+
+      // If refocusing fails or is disabled, open a new window
+      if (openType === "newTab") {
+        window.open(url, "_blank");
+      } else {
+        const newWindow = openWindow(url, size);
+        openedWindows.set(url, newWindow); // Track new window
+      }
+    }
+  }
+});
+
+
+
+
+
+
+// Helper function to check if the pressed keys match the shortcut
+function checkShortcut(event, shortcut) {
+  const keys = shortcut.split('+');
+  const modifiers = {
+    ctrl: event.ctrlKey,
+    shift: event.shiftKey,
+    alt: event.altKey,
+    meta: event.metaKey,
+  };
+
+  for (const key of keys) {
+    const lowerKey = key.toLowerCase();
+    if (lowerKey === 'ctrl' || lowerKey === 'shift' || lowerKey === 'alt' || lowerKey === 'meta') {
+      if (!modifiers[lowerKey]) return false;
+    } else {
+      if (event.key.toLowerCase() !== lowerKey) return false;
+    }
+  }
+  return true;
+} 
 
 // Function to remove a button from both DOM and localStorage
 function removeButton(element, modalId) {
@@ -2564,6 +2997,184 @@ function createOrEditButton(url, name, size, openType, modalId) {
 
 
 </script>
+      
+      
+   <script>
+    document.addEventListener("DOMContentLoaded", () => {
+  const shortcutRefocusToggle = document.getElementById("shortcutBehaviorToggle");
+
+  if (shortcutRefocusToggle) {
+    // Load the setting from localStorage
+    shortcutRefocusToggle.checked = JSON.parse(localStorage.getItem("refocusShortcutWindows")) || false;
+
+    // Save the setting when toggled
+    shortcutRefocusToggle.addEventListener("change", (event) => {
+      localStorage.setItem("refocusShortcutWindows", event.target.checked);
+    });
+  }
+});
+
+
+        </script>   
+      
+      
+      
+  <script>
+let currentButton = null; // Store the button being edited
+let currentShortcut = []; // Store the current shortcut keys
+
+function openShortcutBuilder(button) {
+  currentButton = button;
+  currentShortcut = [];
+  $('#shortcutModal').modal('show');
+  updateShortcutDisplay();
+
+  // Load existing shortcut from localStorage
+  const allShortcuts = JSON.parse(localStorage.getItem('shortcuts')) || {};
+  const shortcutData = allShortcuts[currentButton.dataset.url];
+
+ 
+
+  // Hide any previous alerts
+  document.getElementById('shortcutConflictAlert').style.display = 'none';
+}
+
+// Update the new shortcut display in the modal
+function updateShortcutDisplay() {
+  const shortcutDisplay = document.getElementById('shortcutDisplay');
+  shortcutDisplay.textContent = currentShortcut.length ? currentShortcut.join(' + ') : 'Press any key';
+}
+
+// Add modifier keys to the shortcut
+document.querySelectorAll('.modifier-keys button').forEach((button) => {
+  button.addEventListener('click', () => {
+    const key = button.dataset.key;
+    if (!currentShortcut.includes(key)) {
+      currentShortcut.push(key);
+      updateShortcutDisplay();
+    }
+  });
+});
+
+// Listen for key presses to add the final key
+document.addEventListener('keydown', (event) => {
+  if ($('#shortcutModal').is(':visible')) {
+    event.preventDefault();
+    const key = event.key === ' ' ? 'Space' : event.key;
+    if (!currentShortcut.includes(key)) {
+      currentShortcut.push(key);
+      updateShortcutDisplay();
+    }
+  }
+});
+
+// Save the shortcut
+document.getElementById('saveShortcut').addEventListener('click', () => {
+  const shortcut = currentShortcut.join('+');
+  const conflictData = checkShortcutConflict(shortcut);
+
+  if (conflictData) {
+    // Show conflict alert inside the modal
+    document.getElementById('conflictingButtonName').textContent = conflictData.name;
+    document.getElementById('shortcutConflictAlert').style.display = 'block';
+  } else {
+    saveShortcut(shortcut);
+  }
+});
+
+// Check if the shortcut already exists and return the conflicting shortcut data
+function checkShortcutConflict(shortcut) {
+  const allShortcuts = JSON.parse(localStorage.getItem('shortcuts')) || {};
+
+  for (const [storedShortcut, data] of Object.entries(allShortcuts)) {
+    if (storedShortcut === shortcut && data.url !== currentButton.dataset.url) {
+      return data;  // FIXED: Returns the conflicting shortcut’s stored data
+    }
+  }
+  return null; // No conflict
+}
+
+function saveShortcut(shortcut) {
+  if (!currentButton) return;
+
+  const url = currentButton.dataset.url;
+  const name = currentButton.dataset.name;
+  const openType = currentButton.dataset.openType;
+
+  // Save shortcut without storing size
+  const shortcuts = JSON.parse(localStorage.getItem("shortcuts")) || {};
+  shortcuts[shortcut] = { url, name, openType };
+  localStorage.setItem("shortcuts", JSON.stringify(shortcuts));
+
+  $('#shortcutModal').modal('hide');
+  alert(`Shortcut "${shortcut}" saved for "${name}"`);
+
+  // Update the current shortcut display
+  document.getElementById('currentShortcutDisplay').textContent = shortcut;
+
+  // Hide the modal & reset conflict alert
+  $('#shortcutModal').modal('hide');
+  document.getElementById('shortcutConflictAlert').style.display = 'none';
+}
+
+// Handle override confirmation
+document.getElementById('confirmOverride').addEventListener('click', () => {
+  const shortcut = currentShortcut.join('+');
+  saveShortcut(shortcut);
+});
+
+// Handle cancel override
+document.getElementById('cancelOverride').addEventListener('click', () => {
+  document.getElementById('shortcutConflictAlert').style.display = 'none';
+});
+
+// Reset the modal when closed
+$('#shortcutModal').on('hidden.bs.modal', () => {
+  currentButton = null;
+  currentShortcut = [];
+  document.getElementById('shortcutConflictAlert').style.display = 'none';
+});
+
+// Update the dropdown to use the new shortcut builder
+function setShortcut(element) {
+  const buttonDiv = element.closest('.btn-group');
+  const button = buttonDiv.querySelector('.launch-button');
+  openShortcutBuilder(button);
+}
+    
+      </script>    
+      
+      
+       <script>
+// List of browser default shortcuts (add more if needed)
+const restrictedShortcuts = [
+    "Ctrl+t", "Ctrl+T", "Ctrl+w", "Ctrl+W", "Ctrl+r", "Ctrl+R",
+    "Ctrl+shift+i", "Ctrl+Shift+I", "Ctrl+l", "Ctrl+L", "Alt+d", "Alt+D","Ctrl+Shift+n"
+];
+
+// Check if shortcut is restricted
+function isRestrictedShortcut(shortcut) {
+    return restrictedShortcuts.includes(shortcut);
+}
+
+// Handle saving the shortcut
+document.getElementById('saveShortcut').addEventListener('click', () => {
+    const shortcut = currentShortcut.join('+');
+
+    if (isRestrictedShortcut(shortcut)) {
+        alert(`ATTENTION!"${shortcut}" is a reserved browser shortcut and cannot be used. Please select another key combination`);
+        return;
+    }
+
+    // Save shortcut normally
+    saveShortcut(shortcut);
+});
+
+
+
+
+      </script>
+      
 
 <script>
 const openTypeRadios = document.querySelectorAll('input[name="openType"]');
@@ -2615,114 +3226,443 @@ function removeSection(sectionId) {
 
 
 
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const isFullscreenMode = JSON.parse(localStorage.getItem('isFullscreenMode')) || false;
+    
+    // Apply fullscreen mode immediately
+    handleFullscreenToggle({ target: { checked: isFullscreenMode } });
 
+    // Sync settings toggle (if on settings page)
+    const settingsToggle = document.getElementById('settingsFullscreenToggle');
+    if (settingsToggle) {
+        settingsToggle.checked = isFullscreenMode;
+    }
+});
+
+      </script>
 
 
 
 
 <script>
-
 document.addEventListener('DOMContentLoaded', () => {
+  // Element References
   const stickyButtonsContainer = document.getElementById('stickyButtonsContainer');
+  const sidebar = document.getElementById('popUpSidebar');
+  const sidebarButtonsContainer = document.getElementById('sidebarButtonsContainer');
   const stickToTopButton = document.getElementById('stickToTop');
-  let currentCardData = null; // Temporary storage for the currently viewed card data
 
-  // Load sticky buttons from localStorage
-  loadStickyButtons();
+  // State Management
+  let currentCardData = null;
+  const openedWindows = new Map();
+  const existingStickyButtons = new Set();
+  const existingSidebarButtons = new Set();
+  let isFullscreenMode = localStorage.getItem('isFullscreenMode') === 'true';
+  
+  // Untrackable domains configuration
+  const untrackableDomains = new Set(['google.com', 'chatgpt.com', 'gmail.com']);
 
-  // Event Listener for "Stick to Top" button
-  stickToTopButton.addEventListener('click', () => {
-    if (currentCardData) {
-      addStickyButton(currentCardData);
-      saveStickyButtons();
-      $('#myModal').modal('hide'); // Close the modal after sticking the button
+  // Constants
+  const SIDEBAR_WIDTH = 200;
+  const SIDEBAR_MARGIN = 10;
+  const WINDOW_PARAMS = {
+    small: { width: 600, height: 400 },
+    medium: { width: 800, height: 600 },
+    large: { width: screen.width - (SIDEBAR_WIDTH + SIDEBAR_MARGIN), height: 800 },
+    full: { width: screen.width - (SIDEBAR_WIDTH + SIDEBAR_MARGIN), height: screen.height }
+  };
+
+  // Initialize the sidebar structure
+  function initializeSidebar() {
+    // Control Buttons Container
+    const controlButtonsContainer = document.createElement('div');
+    controlButtonsContainer.classList.add('control-buttons');
+
+    // Close All Button
+    const closeAllButton = document.createElement('button');
+    closeAllButton.classList.add('btn', 'btn-danger', 'btn-block', 'close-all-btn');
+    closeAllButton.textContent = 'Close All';
+    closeAllButton.addEventListener('click', handleCloseAll);
+
+    // Close Sidebar Button
+    const closeSidebarButton = document.createElement('button');
+    closeSidebarButton.classList.add('btn', 'btn-secondary', 'btn-block', 'close-sidebar-btn');
+    closeSidebarButton.textContent = 'Close Sidebar';
+    closeSidebarButton.addEventListener('click', () => sidebar.classList.remove('show'));
+
+    // Window Buttons Container
+    const windowButtonsContainer = document.createElement('div');
+    windowButtonsContainer.classList.add('window-buttons');
+
+    // Fullscreen Toggle Container
+    const fullscreenToggleContainer = document.createElement('div');
+    fullscreenToggleContainer.classList.add('fullscreen-toggle-container');
+    
+    fullscreenToggleContainer.innerHTML = `
+      <div class="custom-control custom-switch">
+        <input type="checkbox" class="custom-control-input" id="fullscreenToggle" ${isFullscreenMode ? 'checked' : ''}>
+        <label class="custom-control-label" for="fullscreenToggle"> <a href="#" style="color:white; text-decoration: none;" data-toggle="tooltip" data-placement="top" title="Open all windows in full screen when using sidebar">Fullscreen mode</a></label>
+      </div>
+    `;
+
+     const fullscreenToggle = fullscreenToggleContainer.querySelector('#fullscreenToggle');
+fullscreenToggle.checked = JSON.parse(localStorage.getItem('isFullscreenMode')) || false;
+fullscreenToggle.addEventListener('change', (event) => {
+    localStorage.setItem('isFullscreenMode', event.target.checked);
+    handleFullscreenToggle(event);
+});
+
+// Sync with settings page toggle if it exists
+const settingsToggle = document.getElementById('settingsFullscreenToggle');
+if (settingsToggle) {
+    settingsToggle.checked = fullscreenToggle.checked;
+    settingsToggle.addEventListener('change', (event) => {
+        const newState = event.target.checked;
+        localStorage.setItem('isFullscreenMode', newState);
+        fullscreenToggle.checked = newState; // Sync sidebar toggle
+        handleFullscreenToggle({ target: { checked: newState } });
+    });
+}
+
+    // Assemble Sidebar
+    controlButtonsContainer.appendChild(closeAllButton);
+    controlButtonsContainer.appendChild(closeSidebarButton);
+    sidebarButtonsContainer.appendChild(controlButtonsContainer);
+    sidebarButtonsContainer.appendChild(windowButtonsContainer);
+    sidebarButtonsContainer.appendChild(fullscreenToggleContainer);
+
+    return { windowButtonsContainer };
+  }
+
+  // Event Handlers
+  function handleCloseAll() {
+    openedWindows.forEach((win) => {
+      if (win && !win.closed) win.close();
+    });
+    openedWindows.clear();
+    
+    stickyButtonsContainer.innerHTML = '';
+    existingStickyButtons.clear();
+    
+    const windowButtons = sidebarButtonsContainer.querySelectorAll('.sidebar-btn');
+    windowButtons.forEach(btn => btn.remove());
+    existingSidebarButtons.clear();
+    
+    sidebar.classList.remove('show');
+    
+    saveStickyButtons();
+    saveSidebarButtons();
+  }
+
+  function handleFullscreenToggle(event) {
+    isFullscreenMode = event.target.checked;
+    localStorage.setItem('isFullscreenMode', isFullscreenMode);
+    
+    openedWindows.forEach((win, title) => {
+      if (win && !win.closed) {
+        const size = isFullscreenMode ? 'full' : win.originalSize;
+        const params = WINDOW_PARAMS[size];
+        
+        try {
+          win.resizeTo(params.width, params.height);
+          win.moveTo(
+            (screen.width - params.width - SIDEBAR_WIDTH - SIDEBAR_MARGIN) / 2,
+            (screen.height - params.height) / 2
+          );
+        } catch (error) {
+          console.warn(`Cannot modify window for ${title}. Window will be reopened.`, error);
+          const url = win.location.href;
+          win.close();
+          openWindow(url, win.originalSize, title);
+        }
+      }
+    });
+  }
+
+  // Window Management
+  function openWindow(url, size, title) {
+    let width, height, left, top;
+    
+    const originalSize = size;
+    if (isFullscreenMode) {
+      size = 'full';
     }
-  });
 
-  // Function to Add a Sticky Button
-  function addStickyButton(cardData) {
+    const params = WINDOW_PARAMS[size] || WINDOW_PARAMS.medium;
+    width = params.width;
+    height = params.height;
+    
+    left = (screen.width - width - SIDEBAR_WIDTH - SIDEBAR_MARGIN) / 2;
+    top = (screen.height - height) / 2;
+
+    const newWindow = window.open(
+      url,
+      '_blank',
+      `width=${width},height=${height},top=${top},left=${left}`
+    );
+
+    if (newWindow) {
+      newWindow.originalSize = originalSize;
+      openedWindows.set(title, newWindow);
+      setupWindowEventListeners(newWindow, title);
+    }
+
+    return newWindow;
+  }
+
+  function setupWindowEventListeners(newWindow, title) {
+    function updateSidebarPosition() {
+      sidebar.style.position = 'fixed';
+      sidebar.style.right = '0';
+      sidebar.style.top = '0';
+      sidebar.style.height = '100%';
+      sidebar.style.width = `${SIDEBAR_WIDTH}px`;
+    }
+
+    updateSidebarPosition();
+
+    newWindow.addEventListener('focus', () => {
+      updateSidebarPosition();
+      sidebar.classList.add('show');
+    });
+
+    newWindow.addEventListener('blur', () => {
+      if (!isWindowMinimized(newWindow)) {
+        sidebar.classList.remove('show');
+      }
+    });
+
+    newWindow.addEventListener('resize', updateSidebarPosition);
+
+    newWindow.addEventListener('beforeunload', () => {
+      openedWindows.delete(title);
+      
+      const stickyBtn = Array.from(stickyButtonsContainer.children)
+        .find(btn => btn.querySelector('span').textContent === title);
+      
+      if (stickyBtn) {
+        stickyButtonsContainer.removeChild(stickyBtn);
+        existingStickyButtons.delete(title);
+      }
+      
+      removeSidebarButton(title);
+      
+      if (openedWindows.size === 0) {
+        sidebar.classList.remove('show');
+      }
+      
+      saveStickyButtons();
+      saveSidebarButtons();
+    });
+  }
+
+  // Utility Functions
+  function isUntrackableDomain(url) {
+    try {
+      const domain = new URL(url).hostname.replace('www.', '');
+      return untrackableDomains.has(domain) || 
+             Array.from(untrackableDomains).some(d => domain.endsWith(d));
+    } catch {
+      return false;
+    }
+  }
+
+  function isWindowMinimized(win) {
+    return win.outerWidth <= 0 || win.outerHeight <= 0;
+  }
+
+  // Button Management
+  function addStickyButton(cardData, type = 'modal') {
+    if (existingStickyButtons.has(cardData.title)) return;
+
     const button = document.createElement('div');
     button.classList.add('animated-btn', 'sticky-btn');
+    const isUntrackable = isUntrackableDomain(cardData.url);
+    if (isUntrackable) button.classList.add('untrackable');
+    
+    button.dataset.id = cardData.title;
+    button.dataset.type = type;
+    button.dataset.url = cardData.url;
+    button.dataset.size = cardData.size;
 
     button.innerHTML = `
       <button class="close-btn">X</button>
       <img src="${cardData.image}" alt="${cardData.title}" />
       <span>${cardData.title}</span>
-      <div class="btn-container">
-        <button 
-          class="btn btn-sm btn-primary open-modal-btn" 
-          data-title="${cardData.title}" 
-          data-image="${cardData.image}" 
-          data-id="${cardData.id}">
-          Open
-        </button>
-      </div>
+      ${isUntrackable ? '<div class="untrackable-indicator" title="Opens new window each time">*</div>' : ''}
     `;
 
-    // Close Button Functionality
-    button.querySelector('.close-btn').addEventListener('click', () => {
-      stickyButtonsContainer.removeChild(button);
-      saveStickyButtons();
-    });
-
-    // Open Modal Button
-    button.querySelector('.open-modal-btn').addEventListener('click', () => {
-      openMyModal(cardData); // Pass card data to dynamically update #myModal
+    button.addEventListener('click', (e) => {
+      if (e.target.classList.contains('close-btn')) {
+        stickyButtonsContainer.removeChild(button);
+        existingStickyButtons.delete(cardData.title);
+        removeSidebarButton(cardData.title);
+        saveStickyButtons();
+        saveSidebarButtons();
+      } else {
+        if (type === 'modal') {
+          openMyModal(cardData);
+        } else if (type === 'window') {
+          if (!isUntrackable) {
+            const win = openedWindows.get(cardData.title);
+            if (win && !win.closed) {
+              win.focus();
+              sidebar.classList.add('show');
+              return;
+            }
+          }
+          openWindow(cardData.url, cardData.size, cardData.title);
+        }
+      }
     });
 
     stickyButtonsContainer.appendChild(button);
+    existingStickyButtons.add(cardData.title);
   }
 
-  // Save Sticky Buttons to localStorage
+  function addSidebarButton(cardData) {
+    if (existingSidebarButtons.has(cardData.title)) return;
+
+    const button = document.createElement('button');
+    button.classList.add('btn', 'btn-block', 'sidebar-btn');
+    
+    const isUntrackable = isUntrackableDomain(cardData.url);
+    button.classList.add(isUntrackable ? 'btn-warning' : 'btn-light');
+    
+    
+    
+    button.title = isUntrackable ? 
+      'This link will open in a new window each time' : 
+      'Click to focus existing window or open new';
+    
+    button.textContent = cardData.title;
+
+    button.addEventListener('click', () => {
+      if (!isUntrackable) {
+        const win = openedWindows.get(cardData.title);
+        if (win && !win.closed) {
+          win.focus();
+          return;
+        }
+      }
+      openWindow(cardData.url, cardData.size, cardData.title);
+    });
+
+    const windowButtonsContainer = sidebarButtonsContainer.querySelector('.window-buttons');
+    windowButtonsContainer.appendChild(button);
+    existingSidebarButtons.add(cardData.title);
+  }
+
+  function removeSidebarButton(title) {
+    const button = Array.from(sidebarButtonsContainer.querySelectorAll('.sidebar-btn'))
+      .find(btn => btn.textContent === title);
+    if (button) {
+      button.remove();
+      existingSidebarButtons.delete(title);
+    }
+  }
+
+  // Storage Management
   function saveStickyButtons() {
-    const buttons = [];
-    stickyButtonsContainer.querySelectorAll('.sticky-btn').forEach(button => {
-      buttons.push({
-        id: button.querySelector('.open-modal-btn').dataset.id,
+    const buttons = Array.from(stickyButtonsContainer.querySelectorAll('.sticky-btn'))
+      .map(button => ({
         title: button.querySelector('span').innerText,
         image: button.querySelector('img').src,
-        modalId: '#myModal', // Always uses #myModal
-      });
-    });
+        type: button.dataset.type,
+        url: button.dataset.url,
+        size: button.dataset.size,
+      }));
     localStorage.setItem('stickyButtons', JSON.stringify(buttons));
   }
 
-  // Load Sticky Buttons from localStorage
-  function loadStickyButtons() {
-    const storedButtons = JSON.parse(localStorage.getItem('stickyButtons')) || [];
-    storedButtons.forEach(buttonData => addStickyButton(buttonData));
+  function saveSidebarButtons() {
+    const buttons = Array.from(sidebarButtonsContainer.querySelectorAll('.sidebar-btn'))
+      .map(button => ({ title: button.textContent }));
+    localStorage.setItem('sidebarButtons', JSON.stringify(buttons));
   }
 
-  // Function to Dynamically Update and Open #myModal
+  function loadStickyButtons() {
+    try {
+      const storedButtons = JSON.parse(localStorage.getItem('stickyButtons')) || [];
+      storedButtons.forEach(buttonData => {
+        addStickyButton(buttonData, buttonData.type);
+        addSidebarButton(buttonData);
+      });
+    } catch (error) {
+      console.error('Error loading sticky buttons:', error);
+      localStorage.removeItem('stickyButtons');
+    }
+  }
+
+  function loadSidebarButtons() {
+    try {
+      const storedButtons = JSON.parse(localStorage.getItem('sidebarButtons')) || [];
+      storedButtons.forEach(buttonData => addSidebarButton(buttonData));
+    } catch (error) {
+      console.error('Error loading sidebar buttons:', error);
+      localStorage.removeItem('sidebarButtons');
+    }
+  }
+
   function openMyModal(cardData) {
     const modalTitle = document.getElementById('modalTitle');
     const modalImage = document.getElementById('modalImage');
 
-    // Update modal content
-    if (modalTitle && modalImage) {
-      modalTitle.innerText = cardData.title;
-      modalImage.src = cardData.image;
-      modalImage.style.display = 'inline-block';
-    }
+    modalTitle.innerText = cardData.title;
+    modalImage.src = cardData.image;
 
-    // Open the modal
     $('#myModal').modal('show');
   }
 
-  // Attach Event Listeners to Card Buttons (Dynamic Update for Current Modal Data)
-  document.querySelectorAll("[data-target='#myModal']").forEach(button => {
+  // Initialize
+  const { windowButtonsContainer } = initializeSidebar();
+  loadStickyButtons();
+  loadSidebarButtons();
+
+  // Modal Button Setup
+  document.querySelectorAll("[data-target='#myModal']").forEach((button) => {
     button.addEventListener('click', () => {
       currentCardData = {
         id: button.getAttribute('data-id'),
         title: button.getAttribute('data-title'),
         image: button.getAttribute('data-image'),
+        url: button.getAttribute('data-url') || null,
+        size: button.getAttribute('data-size') || 'medium',
       };
     });
   });
+
+  // Stick to Top Button Handler
+  stickToTopButton.addEventListener('click', () => {
+    if (currentCardData) {
+      currentCardData.image = document.getElementById('modalImage').src;
+      addStickyButton(currentCardData, 'modal');
+      saveStickyButtons();
+      $('#myModal').modal('hide');
+    }
+  });
+
+  // Global Window Functions
+  window.stickToTopButton = (element) => {
+    const buttonDiv = element.closest('.btn-group');
+    const button = buttonDiv.querySelector('.launch-button');
+
+    const cardData = {
+      title: button.dataset.name,
+      image: button.dataset.image || 'https://www.svgrepo.com/show/510970/external-link.svg',
+      url: button.dataset.url,
+      size: button.dataset.size || 'medium',
+    };
+
+    addStickyButton(cardData, 'window');
+    addSidebarButton(cardData);
+    saveStickyButtons();
+    saveSidebarButtons();
+  };
 });
 
-
-</script>
+      </script>
 
 <script>
 document.getElementById('filterInput').addEventListener('input', function () {
@@ -2843,16 +3783,45 @@ $("#show-sidebar").click(function() {
 });
 </script>
 
-<script>
-// Add event listener to the close window button
-document.getElementById('closeWindowButton').onclick = function() {
-  if (openedWindow) {
-    openedWindow.close();
-  } else {
-    alert("No window is currently open.");
+   <script>
+     $(document).ready(function() {
+  // Get the modal element (same as before)
+  var settings = document.getElementById('settings');
+
+  // Function to open the modal (you can reuse this)
+  function openModal() {
+    $('#settings').modal('show'); // jQuery method
+    // Or, for Bootstrap 5:
+    // const modal = new bootstrap.Modal(myModal);
+    // modal.show();
   }
-};
-</script>
+
+  // Keyboard shortcut (Ctrl + /)
+  $(document).keydown(function(e) {
+    if (e.ctrlKey && e.shiftKey && e.which === 83) { // 191 is the key code for /
+      e.preventDefault(); // Prevent default browser action (like search)
+      openModal();
+    }
+  });
+
+  // Example of opening the modal with a regular link click (optional)
+  $('a[data-target="#settings"]').click(function(e) {
+    e.preventDefault();
+    openModal();
+  });
+
+});
+      </script>
+      <script>
+        document.addEventListener('keydown', (event) => {
+    if (event.key === '/') { 
+        event.preventDefault(); // Prevent default browser behavior for '/'
+        document.getElementById('filterInput').focus(); 
+    }
+});
+      </script>
+   
+   
 
 <div id="noCardsPlaceholder2" style="display: none;">
   
