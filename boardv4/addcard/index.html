@@ -102,8 +102,8 @@
       <button class="btn btn-secondary filter-button" data-filter="tools">Tools</button>
     </div>
     <br><br>
-    <h3>Choose a stack</h3>
-    <select id="sectionDropdown" class="form-control" style="width:300px;">
+    <h3>Choose a stack</h3>Type / to access
+    <select id="sectionDropdown" class="form-control"style="width:300px;">
       <!-- Dynamically populated sections -->
     </select>
     <br><br>
@@ -688,5 +688,13 @@
       }
     });
   </script>
+    <script>
+        document.addEventListener('keydown', (event) => {
+    if (event.key === '/') { 
+        event.preventDefault(); // Prevent default browser behavior for '/'
+        document.getElementById('sectionDropdown').focus(); 
+    }
+});
+      </script>
 </body>
 </html>
